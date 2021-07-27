@@ -16,16 +16,6 @@ import com.crazy.baseimagegallery.R
 
  */
 object CommonUtil {
-//
-//    fun showLoadingDialog(context:Context ?):ProgressBar{
-//
-//        var mProgressBar= ProgressBar(context)
-//
-//        mProgressBar.let {
-//        }
-//
-//        return mProgressBar
-//    }
 
     fun showLoadingDialog(context: Context?): ProgressDialog {
         val progressDialog = ProgressDialog(context)
@@ -36,5 +26,12 @@ object CommonUtil {
             it.setCanceledOnTouchOutside(false)
             return it
         }
+    }
+
+      fun buildStringNotNull (string: String) :String {
+        if (string.isNullOrEmpty()) {
+            return ""
+        }
+        return string
     }
 }

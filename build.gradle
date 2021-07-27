@@ -9,6 +9,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${gradle_version}"
@@ -23,7 +24,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
+        jcenter()
     }
 }
 
@@ -42,4 +43,6 @@ ext{
 
     dagger2Version          = '2.17'
     rxjava2Version          = '2.0.6'
+
+    mmvkVersion             = '1.2.10'
 }

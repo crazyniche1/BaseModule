@@ -6,6 +6,7 @@ import android.app.Application
 import android.content.Context
 import com.crazy.baseimagegallery.inject.component.DaggerAppComponent
 import com.crazy.baseimagegallery.inject.module.AppMoudle
+import com.tencent.mmkv.MMKV
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
@@ -30,6 +31,13 @@ class BaseApplication : Application() , HasActivityInjector {
     override fun onCreate() {
         super.onCreate()
         initDagger()
+
+        initMMKV();
+    }
+
+    private fun initMMKV (){
+        var rootDir = MMKV.initialize(this)
+        print("mmkv root:$rootDir")
     }
 
     /**
