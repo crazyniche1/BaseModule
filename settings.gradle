@@ -1,3 +1,4 @@
 rootProject.name = "CommonApplication"
 include ':app'
 include ':module_base_gallery'
+include ':benchmark'

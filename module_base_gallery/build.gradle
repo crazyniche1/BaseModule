@@ -102,4 +102,7 @@ dependencies {
     //MMKV
     implementation "com.tencent:mmkv-static:$rootProject.mmvkVersion"
 
+    //万能 适配器
+    implementation "org.byteam.superadapter:superadapter:$rootProject.superAdapterVersion"
+
 }

@@ -1,7 +1,7 @@
 package com.crazy.baseimagegallery.base.ui
 
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
@@ -9,7 +9,6 @@ import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.databinding.LayoutBaseBinding
 import com.crazy.baseimagegallery.util.StateView
 import com.gyf.immersionbar.ImmersionBar
-import java.lang.Exception
 
 
 /**
@@ -28,6 +27,7 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
     /** 多状态布局View*/
     private var statusView: StateView? = null
 
+    protected var mContext: Context? = null
     /**
      * 是否设置多状态View 默认为false
      * @return Boolean true:设置
@@ -72,6 +72,8 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        mContext = this
+
         val layoutId = getLayoutId()
         if (layoutId != -1) {
             viewBing = getViewBinding()
@@ -98,8 +100,9 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
      */
     private fun setStatusBar() {
         ImmersionBar.with(this)
+            //原理：如果当前设备支持状态栏字体变色，会设置状态栏字体为黑色，如果当前设备不支持状态栏字体变色，会使当前状态栏加上透明度，否则不执行透明度
             .statusBarDarkFont(true, 0.2f)
-            .navigationBarColor(R.color.common_app_Gray)
+            .navigationBarColor(android.R.color.white)
             .keyboardEnable(true)
             .init()
         //添加内容布局距离屏幕的距离
@@ -113,6 +116,16 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
             )
             rootView.setBackgroundColor(resources.getColor(R.color.common_white))
         }
+    }
+
+    /**
+     * 当一个page，上下滑动导致bar 变色， 需要根据bar的高度变化去实时的变化bar状态栏的字体颜色
+     * 实时变色
+     *
+     */
+    private fun changeBarColor(){
+
+        ImmersionBar.with(this).statusBarDarkFont(true, 0.2f).init()
     }
 
     /** 配置多状态布局*/

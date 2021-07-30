@@ -15,6 +15,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:${gradle_version}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.neenbedankt.gradle.plugins:android-apt:$apt_version"
+        classpath 'androidx.benchmark:benchmark-gradle-plugin:1.0.0'
 
     }
 
@@ -45,4 +46,5 @@ ext{
     rxjava2Version          = '2.0.6'
 
     mmvkVersion             = '1.2.10'
+    superAdapterVersion     = '3.6.8'
 }

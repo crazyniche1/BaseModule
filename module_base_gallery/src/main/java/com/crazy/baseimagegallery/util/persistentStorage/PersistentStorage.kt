@@ -13,10 +13,6 @@ import com.tencent.mmkv.MMKV
  */
 class PersistentStorage {
 
-    constructor(){
-        initMMKV()
-    }
-
     /**
      * 禁止销毁的key，在ondestroy中 需要单独取出，去比较
      */
@@ -38,44 +34,32 @@ class PersistentStorage {
     /**
      * 创建，支持多进程
      */
-    fun initMMKV ( ){
+    private fun initMMKV ( ){
         kv = MMKV.mmkvWithID(mmapID, MMKV.MULTI_PROCESS_MODE)
     }
 
     //crud
     fun enCodeString (k:String,v:String){
-        kv?.let {
-            it.encode(k,v)
-        }
+        kv?.encode(k,v)
 
     }
-
     fun enCodeBoolean (k:String,v:Boolean){
-        kv?.let {
-            it.encode(k,v)
-        }
-        print("bool: " + kv?.decodeBool(k))
+        kv?.encode(k,v)
     }
     fun enCodeInt (k:String,v:Int){
-        kv?.let {
-            it.encode(k,v)
-        }
+        kv?.encode(k,v)
     }
     fun enCodeLong (k:String,v:Long){
-        kv?.let {
-            it.encode(k,v)
-        }
+        kv?.encode(k,v)
     }
     fun enCodeDouble (k:String,v:Double){
-        kv?.let {
-            it.encode(k,v)
-        }
+        kv?.encode(k,v)
     }
 
     fun deCodeString (k:String): String {
         kv?.let {
-             if (!it.decodeString(k).isNullOrEmpty()){
-                 return it.decodeString(k).toString()
+            if (!it.decodeString(k).isNullOrEmpty()) {
+                return it.decodeString(k).toString()
             }
         }
         return ""
@@ -89,7 +73,6 @@ class PersistentStorage {
         kv?.let {
             return it.decodeBool(k)
         }
-        print("bool: " + kv?.decodeBool(k))
         return null
     }
 
@@ -101,7 +84,7 @@ class PersistentStorage {
     fun onDestroy () {
 
         kv?.let {
-            var st = it.allKeys()
+            val st = it.allKeys()
 
             if (st != null) {
                 for (element  in st){
@@ -110,6 +93,10 @@ class PersistentStorage {
                 }
             }
         }
+    }
+
+    init {
+        initMMKV()
     }
 
 }
