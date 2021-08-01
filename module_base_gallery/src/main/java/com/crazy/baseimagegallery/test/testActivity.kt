@@ -50,11 +50,11 @@ class testActivity : BaseMvpActivity<testPresenter, ActivityMainBinding>(), Cont
 
 
         //使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，设置到Toolbar上则不会显示
-        var mCollapsingToolbarLayout = viewBing.collapsingToolbarLayout
-        mCollapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
+//        var mCollapsingToolbarLayout = viewBing.collapsingToolbarLayout
+//        mCollapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
         //通过CollapsingToolbarLayout修改字体颜色
-        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
-        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
+//        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
+//        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
 
 
 //        viewBing.btCommit.setOnClickListener {
