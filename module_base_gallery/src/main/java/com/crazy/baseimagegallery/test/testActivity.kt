@@ -44,6 +44,8 @@ class testActivity : BaseMvpActivity<testPresenter, ActivityMainBinding>(), Cont
 //        viewBing.tvTest.gravity = Gravity.CENTER
         initRecycle(viewBing.rvRvList)
 
+//        initFragment ()
+
         var k = "test";
         var k2 = "test1";
         mPresenter.getSongList("1", 2)
@@ -69,6 +71,12 @@ class testActivity : BaseMvpActivity<testPresenter, ActivityMainBinding>(), Cont
 //            Toast.makeText(this, ""+txt, Toast.LENGTH_SHORT).show()
 //            Toast.makeText(this, ""+txtBool, Toast.LENGTH_SHORT).show()
 //        }
+    }
+
+    private fun initFragment() {
+        val musicFragment = MusicFragment()
+
+        supportFragmentManager.beginTransaction().replace(R.id.fl_root, musicFragment).commit()
     }
 
     fun initRecycle(recyclerView: RecyclerView) {

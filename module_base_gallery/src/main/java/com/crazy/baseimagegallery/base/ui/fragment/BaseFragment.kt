@@ -22,7 +22,6 @@ abstract class BaseFragment :Fragment() {
 
          rootView = inflater.inflate(getLayoutId(),null)
         return rootView
-//        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
      abstract fun getLayoutId():Int
