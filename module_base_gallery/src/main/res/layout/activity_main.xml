@@ -39,15 +39,17 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <FrameLayout
+        android:id="@+id/fl_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <androidx.core.widget.NestedScrollView
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/fl_root"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_rv_list"

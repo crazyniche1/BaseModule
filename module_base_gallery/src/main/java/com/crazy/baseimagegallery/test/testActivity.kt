@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.replace
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.beyondsoft.smarthome.utils.logs.LogTag
@@ -44,7 +45,7 @@ class testActivity : BaseMvpActivity<testPresenter, ActivityMainBinding>(), Cont
 //        viewBing.tvTest.gravity = Gravity.CENTER
         initRecycle(viewBing.rvRvList)
 
-//        initFragment ()
+        initFragment ()
 
         var k = "test";
         var k2 = "test1";
