@@ -12,7 +12,9 @@ import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.base.ui.BaseMvpActivity
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
+import com.crazy.baseimagegallery.util.date.DataUtil
 import com.crazy.baseimagegallery.util.persistentStorage.PersistentStorage
+import java.util.*
 
 /**
  * Copyright (C), 2015-2021, 博彦科技
@@ -43,6 +45,13 @@ class testActivity : BaseMvpActivity<testPresenter, ActivityMainBinding>(), Cont
 
     override fun initData() {
 //        viewBing.tvTest.gravity = Gravity.CENTER
+
+        val calendar1 = DataUtil.stringToCalendar("ddddddd")
+        val calendar = DataUtil.getWeekEndDay()
+        viewBing.tvTest.text = DataUtil.calToString(calendar,DataUtil.dateF1)
+        LogTag.d("calendar${viewBing.tvTest.text.trim()}")
+
+
         initRecycle(viewBing.rvRvList)
 
         initFragment ()
@@ -52,26 +61,6 @@ class testActivity : BaseMvpActivity<testPresenter, ActivityMainBinding>(), Cont
         mPresenter.getSongList("1", 2)
 
 
-        //使用CollapsingToolbarLayout必须把title设置到CollapsingToolbarLayout上，设置到Toolbar上则不会显示
-//        var mCollapsingToolbarLayout = viewBing.collapsingToolbarLayout
-//        mCollapsingToolbarLayout.setTitle("CollapsingToolbarLayout");
-        //通过CollapsingToolbarLayout修改字体颜色
-//        mCollapsingToolbarLayout.setExpandedTitleColor(Color.WHITE);//设置还没收缩时状态下字体颜色
-//        mCollapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的颜色
-
-
-//        viewBing.btCommit.setOnClickListener {
-//            var txt = viewBing.tvTest.text.toString()
-//            PersistentStorage().enCodeString(k,txt)
-//            PersistentStorage().enCodeBoolean(k2,true)
-//        }
-//
-//        viewBing.tvTest.setOnClickListener {
-//            var txt = PersistentStorage().deCodeString(k)
-//            var txtBool = PersistentStorage().deCodeBoolean(k2)
-//            Toast.makeText(this, ""+txt, Toast.LENGTH_SHORT).show()
-//            Toast.makeText(this, ""+txtBool, Toast.LENGTH_SHORT).show()
-//        }
     }
 
     private fun initFragment() {
