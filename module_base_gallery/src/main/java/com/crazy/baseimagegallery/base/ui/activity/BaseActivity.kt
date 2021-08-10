@@ -1,4 +1,4 @@
-package com.crazy.baseimagegallery.base.ui
+package com.crazy.baseimagegallery.base.ui.activity
 
 import android.content.Context
 import android.os.Bundle
@@ -93,6 +93,9 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
         setListener()
     }
 
+    /**
+     * ActivityMainBinding.inflate(layoutInflater)
+     */
     protected abstract fun getViewBinding(): V
 
     /**

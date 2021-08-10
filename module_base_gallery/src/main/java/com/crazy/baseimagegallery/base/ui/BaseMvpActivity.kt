@@ -2,7 +2,7 @@ package com.crazy.baseimagegallery.base.ui
 
 import androidx.viewbinding.ViewBinding
 import com.crazy.baseimagegallery.base.BaseApplication
-import com.crazy.baseimagegallery.databinding.ActivityMainBinding
+import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.inject.component.DaggerActivityComponent
 import com.crazy.baseimagegallery.inject.module.ActivityMoudle
 import com.crazy.baseimagegallery.mvp.presenter.MVPBasePresenter

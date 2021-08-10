@@ -17,11 +17,13 @@ import java.util.*
  * History:
 
  */
-class DataUtil {
+object DataUtil {
 
-    companion object {
 
         const val dateF1= "yyyy.MM.dd"
+        const val dateF2= "yyyy-MM-dd"
+        const val dateF3= "yyyy-MM-dd HH:mm:ss"
+        const val dateF4= "yyyy-MM-dd HH:mm:ss:SSS"
 
         /**
          * day:基于今天的前几天
@@ -150,6 +152,17 @@ class DataUtil {
         }
 
         /**
+         * 获取某天是今年的第几周
+         */
+        fun getWeekOfYear(mCalendar: Calendar): Int {
+            //设置星期日为一周开始的第一天
+            mCalendar.firstDayOfWeek = Calendar.SUNDAY
+            //获得当前日期属于今年的第几周
+            return mCalendar.get(Calendar.WEEK_OF_YEAR)
+        }
+
+
+        /**
          * Calendar 转 string
          */
         open fun calToString(mCalendar :Calendar, pattern :String):String {
@@ -206,5 +219,4 @@ class DataUtil {
         /**
          * 如果需要转Long，直接使用calender.timeInMillis
          */
-    }
 }

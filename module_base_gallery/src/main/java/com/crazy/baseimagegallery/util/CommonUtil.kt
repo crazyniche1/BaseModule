@@ -4,7 +4,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.graphics.Color
 import android.widget.ProgressBar
-import com.crazy.baseimagegallery.R
+//import com.crazy.baseimagegallery.R
 
 /**
  * Copyright (C), 2015-2021, 博彦科技

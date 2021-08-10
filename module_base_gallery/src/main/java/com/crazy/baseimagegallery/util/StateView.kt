@@ -13,6 +13,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.NestedScrollingChild
 import androidx.core.view.NestedScrollingParent
 import androidx.core.view.ScrollingView
+//import com.crazy.mylibrary.R
+
 import com.crazy.baseimagegallery.R
 
 /**

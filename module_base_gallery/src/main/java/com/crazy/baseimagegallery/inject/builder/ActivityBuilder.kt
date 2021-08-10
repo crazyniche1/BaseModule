@@ -1,7 +1,7 @@
 package com.crazy.baseimagegallery.inject.builder
 
-import com.crazy.baseimagegallery.test.testActivity
-import com.crazy.baseimagegallery.test.testModule
+//import com.crazy.baseimagegallery.test.testActivity
+//import com.crazy.baseimagegallery.test.testModule
 import com.gfd.common.injection.scope.ActivityScope
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
