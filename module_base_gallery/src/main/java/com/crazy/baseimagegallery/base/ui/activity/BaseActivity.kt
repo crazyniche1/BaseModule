@@ -77,8 +77,8 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
         val layoutId = getLayoutId()
         if (layoutId != -1) {
             viewBing = getViewBinding()
-            setContentView(viewBing.root)
         }
+        setContentView(viewBing.root)
 
         if (isSetStateBar()) {
             setStatusBar()

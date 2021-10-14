@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CommonApplication">
-        <activity
+       <!-- <activity
             android:name=".test.testActivity"
             android:theme="@style/Theme.CommonApplication.NoActionBar">
 
@@ -23,7 +23,7 @@
             </intent-filter>
 
 
-        </activity>
+        </activity>-->
         <activity android:name=".BaseImage" />
     </application>
 
