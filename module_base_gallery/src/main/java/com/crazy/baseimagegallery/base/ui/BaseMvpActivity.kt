@@ -1,5 +1,6 @@
 package com.crazy.baseimagegallery.base.ui
 
+import android.view.LayoutInflater
 import androidx.viewbinding.ViewBinding
 import com.crazy.baseimagegallery.base.BaseApplication
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
@@ -17,7 +18,7 @@ import javax.inject.Inject
  * Description:
  * History:
  */
-abstract class BaseMvpActivity<T : MVPBasePresenter,V: ViewBinding> : BaseActivity<V>() , MVPBaseView {
+abstract class BaseMvpActivity<T : MVPBasePresenter,V: ViewBinding> : BaseActivity<V>(), MVPBaseView {
 
     @Inject
     lateinit var mPresenter: T

@@ -20,14 +20,17 @@ import com.gyf.immersionbar.ImmersionBar
  * History:
 
  */
-abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
+abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
+
+    /** 视图绑定布局 */
+    lateinit var viewBing: V
 
     lateinit var baseBinding: LayoutBaseBinding
-    lateinit var  viewBing :V
+
     /** 多状态布局View*/
     private var statusView: StateView? = null
 
-    protected var mContext: Context? = null
+    var mContext: Context? = null
     /**
      * 是否设置多状态View 默认为false
      * @return Boolean true:设置
@@ -37,8 +40,9 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
     /** 初始化操作，在onCreate中调用*/
     open fun initOperate() {}
 
-    /** 设置布局id*/
+    /** 设置布局id
     abstract fun getLayoutId(): Int
+     */
 
     /**初始化视图*/
     abstract fun initView()
@@ -74,10 +78,7 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
 
         mContext = this
 
-        val layoutId = getLayoutId()
-        if (layoutId != -1) {
-            viewBing = getViewBinding()
-        }
+        viewBing = getViewBinding()
         setContentView(viewBing.root)
 
         if (isSetStateBar()) {
@@ -93,10 +94,15 @@ abstract class BaseActivity <V:ViewBinding> :AppCompatActivity() {
         setListener()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewBing==null
+    }
     /**
      * ActivityMainBinding.inflate(layoutInflater)
      */
     protected abstract fun getViewBinding(): V
+//    protected abstract val getViewBinding():(LayoutInflater)->V
 
     /**
      * 设置透明状态栏

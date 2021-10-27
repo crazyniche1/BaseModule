@@ -6,11 +6,12 @@ import com.crazy.commonapplication.databinding.ActivityMainBinding
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
-    override fun getLayoutId(): Int  = R.layout.activity_main
-
-    override fun getViewBinding(): ActivityMainBinding  = ActivityMainBinding.inflate(layoutInflater)
+    override fun getViewBinding(): ActivityMainBinding {
+        return ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun initView() {
+        viewBing.tv.text = "测试测试测试测试测试测试测试"
 
     }
 
