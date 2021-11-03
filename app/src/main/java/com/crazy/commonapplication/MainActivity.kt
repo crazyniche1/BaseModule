@@ -3,7 +3,6 @@ package com.crazy.commonapplication
 import android.os.Build.VERSION
 import android.os.StrictMode
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
-import com.crazy.baseimagegallery.util.share.SharedUtil
 import com.crazy.commonapplication.databinding.ActivityMainBinding
 
 
@@ -29,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 //            AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 //            SharedUtil<Any>(this).imageAPP("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png")
-            SharedUtil<Any>(this).toInstallWebView("http://weixin.qq.com/download")
+//            SharedUtil<Any>(this).toInstallWebView("http://weixin.qq.com/download")
         }
     }
 

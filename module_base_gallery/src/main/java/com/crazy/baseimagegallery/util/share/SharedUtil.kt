@@ -92,7 +92,6 @@ import com.crazy.baseimagegallery.util.text.TextUtil
     }
 
     //获取匹配图片类型的应用信息列表：
-    @SuppressLint("QueryPermissionsNeeded")
     private fun getImageApps(im:Intent, uri:Uri){
         val resInfo  = activity.packageManager.queryIntentActivities(im,0)
         if(resInfo.isEmpty()){
