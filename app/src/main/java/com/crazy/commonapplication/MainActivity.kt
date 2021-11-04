@@ -3,6 +3,7 @@ package com.crazy.commonapplication
 import android.os.Build.VERSION
 import android.os.StrictMode
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
+import com.crazy.baseimagegallery.util.share.SharedUtil
 import com.crazy.commonapplication.databinding.ActivityMainBinding
 
 
