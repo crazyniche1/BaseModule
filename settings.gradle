@@ -2,3 +2,4 @@ rootProject.name = "CommonApplication"
 include ':app'
 include ':module_base_gallery'
 include ':benchmark'
+include ':module_util_mshare'
