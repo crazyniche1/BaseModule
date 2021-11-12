@@ -11,7 +11,6 @@ import com.crazy.mshare.concreteBuilder.ConcreteShareBuilder
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private var isNight =false
     override fun getViewBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
@@ -35,6 +34,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
             ConcreteShareBuilder(this).create().shareText("nihao").show()
+            ConcreteShareBuilder(this).create().shareImage("url").show()
         }
     }
 
