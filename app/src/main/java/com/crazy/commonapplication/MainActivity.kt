@@ -1,12 +1,14 @@
 package com.crazy.commonapplication
 
-import android.os.Build.VERSION
-import android.os.StrictMode
-import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
-import com.crazy.baseimagegallery.util.share.SharedUtil
 //import com.crazy.baseimagegallery.util.share.SharedUtil
+import android.widget.Toast
+import androidx.recyclerview.widget.GridLayoutManager
+import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
+import com.crazy.baseimagegallery.base.ui.adapter.listener.OnClickListener
 import com.crazy.commonapplication.databinding.ActivityMainBinding
 import com.crazy.mshare.concreteBuilder.ConcreteShareBuilder
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -21,11 +23,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        val builder = VmPolicy.Builder()
 //        StrictMode.setVmPolicy(builder.build())
 //        builder.detectFileUriExposure()
-        //针对android 7 分享图片读取文件时会引发崩溃。7.0适配-应用之间共享文件
-        if (VERSION.SDK_INT >= 24) {
-            val builder = StrictMode.VmPolicy.Builder()
-            StrictMode.setVmPolicy(builder.build())
-        }
         viewBing.bt.setOnClickListener {
 
 //            AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
@@ -34,11 +31,37 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
             ConcreteShareBuilder(this).create().shareText("nihao").show()
-            ConcreteShareBuilder(this).create().shareImage("url").show()
+//            ConcreteShareBuilder(this).create().shareImage("url").show()
         }
     }
 
     override fun initData() {
+
+//        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
+
+        viewBing.rv.layoutManager = GridLayoutManager(this,3)
+        var dataSet = mutableListOf<HashMap<Int,String>>()
+        for (i  in  0..10){
+            val map = HashMap<Int,String>()
+            map[i] = "nihaoya$i"
+            dataSet.add(i,map)
+        }
+        val mdt = Tadapter(R.layout.item_string,dataSet)
+        viewBing.rv.adapter = mdt
+
+        mdt.setOnClickListener(object :Tadapter.BtItemOnClickListener<HashMap<Int,String>>{
+            override fun onBtItem(t: HashMap<Int, String>, position: Int) {
+                Toast.makeText(this@MainActivity,"bottun",Toast.LENGTH_SHORT).show()
+            }
+        })
+
+        mdt.setOnItemClickListener(object : OnClickListener.ItemOnClickListener<HashMap<Int, String>>{
+            override fun onItem(t: HashMap<Int, String>, position: Int) {
+                Toast.makeText(this@MainActivity,""+t[position],Toast.LENGTH_SHORT).show()
+            }
+
+        })
+
 
     }
 

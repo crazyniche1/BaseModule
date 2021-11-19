@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Build
 import android.os.CountDownTimer
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowInsetsController
+import androidx.core.view.WindowInsetsCompat
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.commonapplication.databinding.ActivitySplashBinding
 
@@ -18,7 +21,7 @@ import com.crazy.commonapplication.databinding.ActivitySplashBinding
  */
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
-    private val countDownInterval: Long = 3 * 1000
+    private val countDownInterval: Long = 2 * 1000
     override fun getViewBinding(): ActivitySplashBinding {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
@@ -53,6 +56,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         if (Build.VERSION.SDK_INT in 12..18) {
             val view = this.window.decorView
             view.systemUiVisibility = View.GONE
+
         } else if (Build.VERSION.SDK_INT >= 19) {
             val decorView = window.decorView
             val uiOptions = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -63,6 +67,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
             decorView.systemUiVisibility = uiOptions
+        }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val view =this.window.decorView
+            val wic = view.windowInsetsController
+//            val isVisible =  view.onApplyWindowInsets(this.viewBing.root.rootWindowInsets).isVisible(WindowInsets.Type.statusBars())
+            wic?.hide(WindowInsets.Type.statusBars())
         }
+
     }
 }

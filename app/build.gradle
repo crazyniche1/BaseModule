@@ -57,5 +57,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'com.github.crazyniche1:Mshare:v1.0.2'
 }
