@@ -1,11 +1,8 @@
 package com.crazy.baseimagegallery.template
 
-import android.view.View
 import android.widget.Button
-import android.widget.TextView
-import com.crazy.baseimagegallery.R
-import com.crazy.baseimagegallery.base.ui.adapter.BaseAdapter
-import com.crazy.baseimagegallery.base.ui.adapter.BaseViewHolder
+import com.crazy.baseimagegallery.base.ui.adapter.BaseItemAdapter
+import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewHolder
 
 /**
  * Copyright (C), 2015-2021, 博彦科技
@@ -41,7 +38,7 @@ Toast.makeText(this@MainActivity,""+t[position],Toast.LENGTH_SHORT).show()
 
  */
 class Tadapter(  layoutResId:Int,  dataSet:MutableList<HashMap<Int,String>>) :
-    BaseAdapter<HashMap<Int, String>>(){
+    BaseItemAdapter<HashMap<Int, String>>(){
 
     private var mbt: Button? = null
     private var mItemOnClickListener: BtItemOnClickListener<HashMap<Int,String>>?=null

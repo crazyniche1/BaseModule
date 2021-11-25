@@ -1,6 +1,7 @@
 package com.crazy.commonapplication
 
 //import com.crazy.baseimagegallery.util.share.SharedUtil
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
@@ -46,14 +47,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             map[i] = "nihaoya$i"
             dataSet.add(i,map)
         }
-        val mdt = Tadapter(R.layout.item_string,dataSet)
+//        val idList = MutableList(1,2)
+        val idList = mutableListOf(R.layout.item_string,R.layout.item_string2)
+        val mdt = Tadapter1(idList,dataSet)
         viewBing.rv.adapter = mdt
 
-        mdt.setOnClickListener(object :Tadapter.BtItemOnClickListener<HashMap<Int,String>>{
-            override fun onBtItem(t: HashMap<Int, String>, position: Int) {
-                Toast.makeText(this@MainActivity,"bottun",Toast.LENGTH_SHORT).show()
-            }
-        })
+//        mdt.setOnClickListener(object :Tadapter.BtItemOnClickListener<HashMap<Int,String>>{
+//            override fun onBtItem(t: HashMap<Int, String>, position: Int) {
+//                Toast.makeText(this@MainActivity,"bottun",Toast.LENGTH_SHORT).show()
+//            }
+//        })
 
         mdt.setOnItemClickListener(object : OnClickListener.ItemOnClickListener<HashMap<Int, String>>{
             override fun onItem(t: HashMap<Int, String>, position: Int) {

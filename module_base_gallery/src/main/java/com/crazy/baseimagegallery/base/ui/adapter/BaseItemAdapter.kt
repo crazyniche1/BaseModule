@@ -4,19 +4,18 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.crazy.baseimagegallery.base.ui.adapter.listener.OnClickListener
+import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewHolder
 
 /**
  * Copyright (C), 2015-2021, 博彦科技
- * FileName: BaseAdapter
+ * FileName: BaseItemAdapter
  * Author: zy
  * Date: 2021/11/16 15:40
  * Description: 适配器
- * History:
+ * History: 单列表适配器
 
  */
-abstract class  BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder>() {
-
-//    constructor(  layoutResId:Int,  dataSet:MutableList<T> )
+abstract class  BaseItemAdapter<T> : RecyclerView.Adapter<BaseViewHolder>() {
 
     private  lateinit var mOnItemClickListener: OnClickListener.ItemOnClickListener<T>
     private lateinit  var mOnItemLongClickListener: OnClickListener.ItemOnLongClickListener<T>
@@ -55,6 +54,7 @@ abstract class  BaseAdapter<T> : RecyclerView.Adapter<BaseViewHolder>() {
 
     override fun getItemCount(): Int =this.mDataSet.size
 
+    override fun getItemViewType(position: Int): Int = mLayoutResId
 
     abstract fun mOnBindViewHolder(holder: BaseViewHolder, position: Int, get: T)
 

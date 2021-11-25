@@ -1,4 +1,4 @@
-package com.crazy.baseimagegallery.base.ui.adapter
+package com.crazy.baseimagegallery.base.ui.adapter.viewholder
 
 import android.util.SparseArray
 import android.view.View
@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
  * History:
 
  */
-class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+ class BaseViewHolder(mItemView: View) : RecyclerView.ViewHolder(mItemView) {
     private val childViews = SparseArray<View>()
 
     fun <T : View?> findViewById(id: Int): T? {
@@ -25,4 +24,5 @@ class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
         return childView as T
     }
+
 }

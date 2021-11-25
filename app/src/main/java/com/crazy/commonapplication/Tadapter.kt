@@ -2,8 +2,8 @@ package com.crazy.commonapplication
 
 import android.widget.Button
 import android.widget.TextView
-import com.crazy.baseimagegallery.base.ui.adapter.BaseAdapter
-import com.crazy.baseimagegallery.base.ui.adapter.BaseViewHolder
+import com.crazy.baseimagegallery.base.ui.adapter.BaseItemAdapter
+import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewHolder
 
 /**
  * Copyright (C), 2015-2021, 博彦科技
@@ -15,7 +15,7 @@ import com.crazy.baseimagegallery.base.ui.adapter.BaseViewHolder
 
  */
 class Tadapter(  layoutResId:Int,  dataSet:MutableList<HashMap<Int,String>>) :
-    BaseAdapter<HashMap<Int, String>>(){
+    BaseItemAdapter<HashMap<Int, String>>(){
 
     private var mbt: Button? = null
     private var mItemOnClickListener: BtItemOnClickListener<HashMap<Int,String>>?=null
@@ -26,7 +26,7 @@ class Tadapter(  layoutResId:Int,  dataSet:MutableList<HashMap<Int,String>>) :
     }
 
     override fun mOnBindViewHolder(holder: BaseViewHolder, position: Int, get: HashMap<Int,String>) {
-        val mtv = holder.findViewById<TextView>(R.id.tvx)
+        val mtv = holder.findViewById<TextView>(R.id.tvl)
          mbt = holder.findViewById<Button>(R.id.bt)
         mtv?.text = get[position].toString()
 

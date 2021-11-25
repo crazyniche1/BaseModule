@@ -21,7 +21,7 @@ import com.crazy.commonapplication.databinding.ActivitySplashBinding
  */
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
-    private val countDownInterval: Long = 2 * 1000
+    private val countDownInterval: Long = 1 * 1000
     override fun getViewBinding(): ActivitySplashBinding {
         return ActivitySplashBinding.inflate(layoutInflater)
     }
