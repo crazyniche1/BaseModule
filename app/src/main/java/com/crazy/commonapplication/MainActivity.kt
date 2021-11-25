@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.base.ui.adapter.listener.OnClickListener
 import com.crazy.commonapplication.databinding.ActivityMainBinding
+import com.crazy.commonapplication.databinding.ItemStringBinding
 import com.crazy.mshare.concreteBuilder.ConcreteShareBuilder
 import java.util.*
 import kotlin.collections.HashMap
@@ -50,13 +51,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        val idList = MutableList(1,2)
         val idList = mutableListOf(R.layout.item_string,R.layout.item_string2)
         val mdt = Tadapter1(idList,dataSet)
+
+
         viewBing.rv.adapter = mdt
 
-//        mdt.setOnClickListener(object :Tadapter.BtItemOnClickListener<HashMap<Int,String>>{
-//            override fun onBtItem(t: HashMap<Int, String>, position: Int) {
-//                Toast.makeText(this@MainActivity,"bottun",Toast.LENGTH_SHORT).show()
-//            }
-//        })
 
         mdt.setOnItemClickListener(object : OnClickListener.ItemOnClickListener<HashMap<Int, String>>{
             override fun onItem(t: HashMap<Int, String>, position: Int) {
@@ -64,7 +62,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
 
         })
-
 
     }
 
