@@ -1,15 +1,10 @@
 package com.crazy.commonapplication
 
 //import com.crazy.baseimagegallery.util.share.SharedUtil
-import android.text.TextUtils
-import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
-import com.crazy.baseimagegallery.base.ui.adapter.listener.OnClickListener
 import com.crazy.commonapplication.databinding.ActivityMainBinding
-import com.crazy.commonapplication.databinding.ItemStringBinding
 import com.crazy.mshare.concreteBuilder.ConcreteShareBuilder
-import java.util.*
 import kotlin.collections.HashMap
 
 
@@ -42,26 +37,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
 
         viewBing.rv.layoutManager = GridLayoutManager(this,3)
-        var dataSet = mutableListOf<HashMap<Int,String>>()
+        val dataSet = mutableListOf<HashMap<Int,String>>()
         for (i  in  0..10){
             val map = HashMap<Int,String>()
             map[i] = "nihaoya$i"
             dataSet.add(i,map)
         }
-//        val idList = MutableList(1,2)
-        val idList = mutableListOf(R.layout.item_string,R.layout.item_string2)
-        val mdt = Tadapter1(idList,dataSet)
-
+        val mdt = ViewBindTadapter(dataSet)
 
         viewBing.rv.adapter = mdt
 
 
-        mdt.setOnItemClickListener(object : OnClickListener.ItemOnClickListener<HashMap<Int, String>>{
-            override fun onItem(t: HashMap<Int, String>, position: Int) {
-                Toast.makeText(this@MainActivity,""+t[position],Toast.LENGTH_SHORT).show()
-            }
-
-        })
+//        mdt.setOnItemClickListener(object : OnClickListener.ItemOnClickListener<HashMap<Int, String>>{
+//            override fun onItem(t: HashMap<Int, String>, position: Int) {
+//                Toast.makeText(this@MainActivity,""+t[position],Toast.LENGTH_SHORT).show()
+//            }
+//
+//        })
 
     }
 

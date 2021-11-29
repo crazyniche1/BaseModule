@@ -3,7 +3,6 @@ package com.crazy.commonapplication
 import android.widget.Button
 import android.widget.TextView
 import com.beyondsoft.smarthome.utils.logs.LogTag
-import com.crazy.baseimagegallery.base.ui.adapter.BaseItemAdapter
 import com.crazy.baseimagegallery.base.ui.adapter.BaseItemsAdapter
 import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewHolder
 
