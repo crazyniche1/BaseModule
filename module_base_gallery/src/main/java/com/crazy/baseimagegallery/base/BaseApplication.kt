@@ -10,6 +10,7 @@ import com.tencent.mmkv.MMKV
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import org.jetbrains.annotations.Contract
 import javax.inject.Inject
 
 
@@ -32,11 +33,11 @@ class BaseApplication : Application() , HasActivityInjector {
         super.onCreate()
         initDagger()
 
-        initMMKV();
+        initMMKV()
     }
 
     private fun initMMKV (){
-        var rootDir = MMKV.initialize(this)
+        val rootDir = MMKV.initialize(this)
         print("mmkv root:$rootDir")
     }
 
@@ -59,4 +60,8 @@ class BaseApplication : Application() , HasActivityInjector {
     }
 
     override fun activityInjector(): AndroidInjector<Activity> =activityDispatchingAndroidInjector
+
+    open fun xixi(): Context {
+        return applicationContext
+    }
 }

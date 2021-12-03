@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewBindHolder
 import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewHolder
 
@@ -17,7 +18,7 @@ import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewHolder
 
  */
 abstract class BaseItemBindingAdapter<VB:ViewBinding,T>
-    (val mCreator: (inflater: LayoutInflater, root: ViewGroup, attachToRoot: Boolean) -> VB,val mDataSet :MutableList<T>): RecyclerView.Adapter<BaseViewBindHolder<VB>>(){
+    (private val mCreator: (inflater: LayoutInflater, root: ViewGroup, attachToRoot: Boolean) -> VB, val mDataSet :MutableList<T>): RecyclerView.Adapter<BaseViewBindHolder<VB>>(){
 
     private fun <vb : ViewBinding> ViewGroup.getViewHolder(
         creator: (inflater: LayoutInflater, root: ViewGroup, attachToRoot: Boolean) -> vb

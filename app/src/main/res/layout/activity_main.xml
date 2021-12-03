@@ -23,24 +23,27 @@
 
     <Button
         android:id="@+id/bt"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:padding="2dp"
         android:id="@+id/rv"
-        android:layout_width="409dp"
-        android:layout_height="257dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="131dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="279dp"
+        android:background="@android:color/darker_gray"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt" />
+        app:layout_constraintTop_toTopOf="@+id/bt" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

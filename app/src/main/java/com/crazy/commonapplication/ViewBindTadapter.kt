@@ -1,9 +1,9 @@
 package com.crazy.commonapplication
 
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import android.view.MotionEvent
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewbinding.ViewBinding
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.adapter.BaseItemBindingAdapter
 import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewBindHolder
 import com.crazy.commonapplication.databinding.ItemStringBinding
@@ -17,12 +17,20 @@ import com.crazy.commonapplication.databinding.ItemStringBinding
  * History:
 
  */
-class ViewBindTadapter (dataSet:MutableList<HashMap<Int,String>>):
+class ViewBindTadapter(dataSet: MutableList<HashMap<Int, String>>):
     BaseItemBindingAdapter<ItemStringBinding,
-            HashMap<Int,String>>(ItemStringBinding::inflate,dataSet){
+            HashMap<Int,String>>(ItemStringBinding::inflate,dataSet) {
 
     override fun mOnBindViewHolder(vb: ItemStringBinding, position: Int, get: HashMap<Int,String>) {
         vb.tvr.text = get[position]
     }
+
+    fun mNotifyItemRemoved(position: Int) {
+        this.mDataSet.removeAt(position)
+        notifyItemRemoved(position)
+        LogTag.d(""+mDataSet.size)
+
+    }
+
 }
 

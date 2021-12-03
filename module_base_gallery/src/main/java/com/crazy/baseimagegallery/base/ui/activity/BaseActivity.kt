@@ -2,12 +2,20 @@ package com.crazy.baseimagegallery.base.ui.activity
 
 import android.content.Context
 import android.os.Bundle
+import android.os.PersistableBundle
+import android.view.KeyEvent
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.R
+import com.crazy.baseimagegallery.databinding.ActivityMainBinding
 import com.crazy.baseimagegallery.databinding.LayoutBaseBinding
+import com.crazy.baseimagegallery.template.TMainActivity
+import com.crazy.baseimagegallery.util.CommonUtil
 import com.crazy.baseimagegallery.util.StateView
+import com.crazy.baseimagegallery.util.activity.ActivityManager
 import com.gyf.immersionbar.ImmersionBar
 
 
@@ -72,12 +80,12 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
      */
     open fun isSetPaddingTop(): Boolean = true
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mContext = this
-
+        //加入Activity管理器
+        ActivityManager.instance.addActivity(this)
         viewBing = getViewBinding()
         setContentView(viewBing.root)
 
@@ -97,6 +105,7 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         viewBing==null
+        ActivityManager.instance.removeActivity(this)
     }
     /**
      * ActivityMainBinding.inflate(layoutInflater)

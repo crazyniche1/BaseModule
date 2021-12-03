@@ -2,6 +2,9 @@ package com.crazy.baseimagegallery.util
 
 import android.app.ProgressDialog
 import android.content.Context
+import android.os.Process
+import com.crazy.baseimagegallery.util.activity.ActivityManager
+import kotlin.system.exitProcess
 
 /**
  * Copyright (C), 2015-2021, 博彦科技
@@ -26,10 +29,19 @@ object CommonUtil {
         }
     }
 
-      fun buildStringNotNull (string: String) :String {
+      fun buildStringNotNull (string: String?) :String {
         if (string.isNullOrEmpty()) {
             return ""
         }
         return string
+    }
+
+    /**
+     * 退出应用
+     */
+    fun exitApp() {
+        ActivityManager.instance.finishAll()
+        Process.killProcess(Process.myPid())
+        exitProcess(0)
     }
 }
