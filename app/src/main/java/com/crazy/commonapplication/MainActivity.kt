@@ -4,16 +4,14 @@ import android.content.Intent
 import android.view.KeyEvent
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
-import android.widget.Toast
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.vectordrawable.graphics.drawable.AnimationUtilsCompat
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.util.CommonUtil
 import com.crazy.baseimagegallery.util.activity.ActivityManager
+import com.crazy.baseimagegallery.util.toast.ToastUtil
 import com.crazy.commonapplication.databinding.ActivityMainBinding
-import kotlin.collections.HashMap
+import kotlin.random.Random
 
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -30,6 +28,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        builder.detectFileUriExposure()
         viewBing.bt.setOnClickListener {
 
+            val ranColor = -0x1000000 or Random.nextInt(0x00ffffff)
+
+            viewBing.bt.setBackgroundColor(ranColor)
+
 //            AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
 //            SharedUtil<Any>(this).imageAPP("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png")
 //            SharedUtil<Any>(this).toInstallWebView("http://weixin.qq.com/download")
@@ -38,7 +40,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //            ConcreteShareBuilder(this).create().shareText("nihao").show()
 //            ConcreteShareBuilder(this).create().shareImage("url").show()
             val intent = Intent(mContext,MainActivity2::class.java)
-            startActivity(intent)
+//            startActivity(intent)
         }
 
         viewBing.bt.setOnLongClickListener {
@@ -82,8 +84,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        })
 
 
-    }
 
+    }
 
     private lateinit var  mdt: ViewBindTadapter
     private var mExitTime:Long=0
@@ -93,7 +95,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (keyCode==KeyEvent.KEYCODE_BACK ) {
             if((System.currentTimeMillis().minus(mExitTime).compareTo(2000)) >0){
                 mExitTime=System.currentTimeMillis()
-                Toast.makeText(this,getText(R.string.main_exit_app), Toast.LENGTH_SHORT).show()
+                ToastUtil.showShort(R.string.main_exit_app)
+
             }else{
                 CommonUtil.exitApp()
             }

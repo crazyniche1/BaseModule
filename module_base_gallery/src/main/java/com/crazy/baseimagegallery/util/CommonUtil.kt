@@ -41,7 +41,7 @@ object CommonUtil {
      */
     fun exitApp() {
         ActivityManager.instance.finishAll()
-        Process.killProcess(Process.myPid())
-        exitProcess(0)
+//        Process.killProcess(Process.myPid())
+//        exitProcess(0)
     }
 }

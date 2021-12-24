@@ -6,11 +6,11 @@ import android.app.Application
 import android.content.Context
 import com.crazy.baseimagegallery.inject.component.DaggerAppComponent
 import com.crazy.baseimagegallery.inject.module.AppMoudle
+import com.crazy.baseimagegallery.util.toast.ToastUtil
 import com.tencent.mmkv.MMKV
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
-import org.jetbrains.annotations.Contract
 import javax.inject.Inject
 
 
@@ -25,7 +25,7 @@ import javax.inject.Inject
 class BaseApplication : Application() , HasActivityInjector {
 
     @Inject
-    lateinit internal var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    internal lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
 
     lateinit var appComponent: DaggerAppComponent
 
@@ -34,6 +34,8 @@ class BaseApplication : Application() , HasActivityInjector {
         initDagger()
 
         initMMKV()
+
+        ToastUtil.init(this)
     }
 
     private fun initMMKV (){
@@ -61,7 +63,4 @@ class BaseApplication : Application() , HasActivityInjector {
 
     override fun activityInjector(): AndroidInjector<Activity> =activityDispatchingAndroidInjector
 
-    open fun xixi(): Context {
-        return applicationContext
-    }
 }

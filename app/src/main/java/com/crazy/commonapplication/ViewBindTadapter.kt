@@ -1,11 +1,7 @@
 package com.crazy.commonapplication
 
-import android.view.MotionEvent
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.adapter.BaseItemBindingAdapter
-import com.crazy.baseimagegallery.base.ui.adapter.viewholder.BaseViewBindHolder
 import com.crazy.commonapplication.databinding.ItemStringBinding
 
 /**
