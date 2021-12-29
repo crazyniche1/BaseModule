@@ -5,15 +5,19 @@ import android.view.KeyEvent
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.util.CommonUtil
 import com.crazy.baseimagegallery.util.activity.ActivityManager
+import com.crazy.baseimagegallery.util.arouter.RouterPath
 import com.crazy.baseimagegallery.util.toast.ToastUtil
 import com.crazy.commonapplication.databinding.ActivityMainBinding
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.random.Random
 
-
+@Route(path = RouterPath.Home.home)
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getViewBinding(): ActivityMainBinding {
@@ -55,13 +59,22 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 //        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
 
-//        viewBing.rv.layoutManager = GridLayoutManager(this,3)
+        initRecycleView(buildRecycleViewData())
+        val id = intent.data
+
+
+    }
+
+    private fun buildRecycleViewData():MutableList<HashMap<Int,String>>{
         val dataSet = mutableListOf<HashMap<Int,String>>()
         for (i  in  0..10){
             val map = HashMap<Int,String>()
             map[i] = "nihaoya$i"
             dataSet.add(i,map)
         }
+        return dataSet
+    }
+    private fun initRecycleView(dataSet:MutableList<HashMap<Int,String>>){
         mdt = ViewBindTadapter(dataSet)
         val rv = viewBing.rv
         rv.addItemDecoration(MyDecoration())
@@ -75,6 +88,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         val ith = ItemTouchHelper(RvCallback(mdt, mContext!!))
         ith.attachToRecyclerView(rv)
 
+
         rv.adapter = mdt
 //        mdt.setOnItemClickListener(object : OnClickListener.ItemOnClickListener<HashMap<Int, String>>{
 //            override fun onItem(t: HashMap<Int, String>, position: Int) {
@@ -82,9 +96,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //            }
 //
 //        })
-
-
-
     }
 
     private lateinit var  mdt: ViewBindTadapter

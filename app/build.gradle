@@ -16,14 +16,20 @@ android {
         versionName rootProject.ext.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     signingConfigs {
         config{
-            keyAlias 'amd'
-            keyPassword '123456'
-            storeFile file('../key/amd.jsk')
-            storePassword '123456'
+            keyAlias rootProject.ext.keyAlias
+            keyPassword rootProject.ext.keyPassword
+            storeFile file(rootProject.ext.storeFile)
+            storePassword rootProject.ext.storePassword
         }
     }
 
@@ -31,8 +37,21 @@ android {
 
         release {
             signingConfig signingConfigs.config
+            //混淆编译
             minifyEnabled false
+            //移除无用资源
+            shrinkResources false
+            //压缩
+            zipAlignEnabled true
+            //正式版不打印日志
+            buildConfigField("boolean", "LOG_DEBUG", "false")
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+        }
+
+        debug {
+            signingConfig signingConfigs.config
+            buildConfigField("boolean", "LOG_DEBUG", "true")
         }
 
     }
@@ -46,17 +65,26 @@ android {
     buildFeatures {
         viewBinding true
     }
+    resourcePrefix "${project.name}_"
 
+      //自定义输出apk名
+    applicationVariants.all{
+        variant ->
+            variant.outputs.all {
+                if (variant.getBuildType().getName() == 'release') {
+                    outputFileName = new File("app" + "_v" + variant.versionName + "_code" + variant.versionCode + "_" + releaseDate() + "_" + variant.getBuildType().getName() + ".apk")
+                }
+            }
+    }
 }
 
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation  project(path :':module_base_gallery')
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
+def static releaseDate(){
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
 
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    implementation 'com.github.crazyniche1:Mshare:v1.0.2'
+
+
+dependencies {
+    api  project(':module_base_gallery')
+    kapt "com.alibaba:arouter-compiler:$rootProject.arouterVersion"
 }

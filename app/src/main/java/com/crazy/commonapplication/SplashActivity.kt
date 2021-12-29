@@ -1,13 +1,13 @@
 package com.crazy.commonapplication
 
-import android.content.Intent
 import android.os.Build
 import android.os.CountDownTimer
 import android.view.View
 import android.view.WindowInsets
-import android.view.WindowInsetsController
-import androidx.core.view.WindowInsetsCompat
+import com.alibaba.android.arouter.launcher.ARouter
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
+import com.crazy.baseimagegallery.util.arouter.RouterPath
 import com.crazy.commonapplication.databinding.ActivitySplashBinding
 
 /**
@@ -41,9 +41,11 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
             }
 
             override fun onFinish() {
-                val intent = Intent(mContext,MainActivity::class.java)
-                startActivity(intent)
-                finish()
+//                val intent = Intent(mContext,MainActivity::class.java)
+//                startActivity(intent)
+                ARouter.getInstance().build(RouterPath.Home.home).navigation()
+                ARouter.getInstance().build(RouterPath.Service.s1).navigation()
+//                finish()
             }
         }.start()
     }
@@ -68,6 +70,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
             decorView.systemUiVisibility = uiOptions
         }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+
+        } else  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             val view =this.window.decorView
             val wic = view.windowInsetsController
 //            val isVisible =  view.onApplyWindowInsets(this.viewBing.root.rootWindowInsets).isVisible(WindowInsets.Type.statusBars())

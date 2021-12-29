@@ -5,6 +5,8 @@ package com.crazy.baseimagegallery.util
  * Created by jyotidubey on 05/01/18.
  */
 object AppConstants {
+//    注册时申请的APPID
+    internal  val Bugly_AppId = "263a225235"
 
     internal val APP_DB_NAME = "mindorks_mvp.db"
     internal val PREF_NAME = "mindorks_pref"

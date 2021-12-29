@@ -4,9 +4,14 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import com.alibaba.android.arouter.launcher.ARouter
+import com.crazy.baseimagegallery.BuildConfig
 import com.crazy.baseimagegallery.inject.component.DaggerAppComponent
 import com.crazy.baseimagegallery.inject.module.AppMoudle
+import com.crazy.baseimagegallery.util.AppConstants
+import com.crazy.baseimagegallery.util.CommonUtil
 import com.crazy.baseimagegallery.util.toast.ToastUtil
+import com.tencent.bugly.crashreport.CrashReport
 import com.tencent.mmkv.MMKV
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -36,6 +41,33 @@ class BaseApplication : Application() , HasActivityInjector {
         initMMKV()
 
         ToastUtil.init(this)
+
+        initARouter()
+
+        initBugly()
+    }
+
+    private fun initBugly() {
+        val st = setStrategy()
+        CrashReport.initCrashReport(this, AppConstants.Bugly_AppId, BuildConfig.DEBUG ,st)
+    }
+
+    /**
+     * 多进程应用仅仅在主线程显示log
+     */
+    private fun setStrategy() :CrashReport.UserStrategy{
+        val  processName  = CommonUtil.getProcessName(android.os.Process.myPid())
+        val crs = CrashReport.UserStrategy(this)
+        crs.isUploadProcess  = processName == null || processName == packageName
+        return crs
+    }
+
+    private fun initARouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog()
+            ARouter.openDebug()
+        }
+        ARouter.init(this)
     }
 
     private fun initMMKV (){
@@ -54,6 +86,11 @@ class BaseApplication : Application() , HasActivityInjector {
 //            .application(this)
 //            .build()
 //            .inject(this)
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+
     }
 
     companion object {
