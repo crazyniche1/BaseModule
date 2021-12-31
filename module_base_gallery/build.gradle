@@ -1,10 +1,11 @@
-if ( Boolean.valueOf(rootProject.ext.isModule)){
+if (  isModule.toBoolean()){
     apply plugin: 'com.android.application'
 }else {
     apply plugin :'com.android.library'
 }
 apply plugin:'kotlin-android'
 apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 30
@@ -119,9 +120,13 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
 
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
 
     api "com.alibaba:arouter-api:$rootProject.arouterVersion"
     kapt "com.alibaba:arouter-compiler:$rootProject.arouterVersion"
+
+    //屏幕适配
+    implementation "com.github.JessYanCoding:AndroidAutoSize:$rootProject.AndroidAutoSizeVersion "
 
 }

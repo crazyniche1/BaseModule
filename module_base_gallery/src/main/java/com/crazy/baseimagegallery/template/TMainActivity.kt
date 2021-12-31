@@ -2,9 +2,13 @@ package com.crazy.baseimagegallery.template
 
 import android.text.Editable
 import android.text.TextWatcher
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
-import com.tencent.bugly.crashreport.CrashReport
+import com.crazy.baseimagegallery.http.net.NetManager
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class TMainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -15,8 +19,7 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initView() {
         viewBing.button.setOnClickListener {
 //            SharedUtil<Any>(this,).image("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png?imageMogr2/auto-orient/strip|imageView2/2/w/345/format/webp")
-
-            CrashReport.testJavaCrash()
+            requestNet()
         }
 
         viewBing.etv.addTextChangedListener(object :xxx(){
@@ -25,6 +28,23 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
             }
         })
 
+    }
+
+    private fun requestNet() {
+        GlobalScope.launch {
+            try {
+                val ss = NetManager.initRetrofit.homeBanner()
+                val  data =ss.data
+                for ((i,e) in data?.withIndex()!!){
+                    data[i]
+                }
+                LogTag.d("Data${ss.data}")
+
+            }catch (e:Exception){
+                LogTag.e("Data${e}")
+            }
+
+        }
     }
 
     override fun initData() {

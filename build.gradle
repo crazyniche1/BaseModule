@@ -60,6 +60,8 @@ ext{
 
     bugly_version           = "3.4.4"
 
+    AndroidAutoSizeVersion  = 'v1.2.1'
+
     keyAlias                = 'key0'
     storeFile               = '../jks/mbgjks.jks'
     keyPassword             = 'mbgjks'

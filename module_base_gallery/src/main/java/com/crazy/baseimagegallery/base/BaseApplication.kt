@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import com.alibaba.android.arouter.launcher.ARouter
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.BuildConfig
 import com.crazy.baseimagegallery.inject.component.DaggerAppComponent
 import com.crazy.baseimagegallery.inject.module.AppMoudle
@@ -49,6 +50,7 @@ class BaseApplication : Application() , HasActivityInjector {
 
     private fun initBugly() {
         val st = setStrategy()
+        LogTag.d("initBugly${BuildConfig.DEBUG}")
         CrashReport.initCrashReport(this, AppConstants.Bugly_AppId, BuildConfig.DEBUG ,st)
     }
 
