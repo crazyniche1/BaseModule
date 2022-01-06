@@ -11,11 +11,12 @@ import com.crazy.baseimagegallery.http.bean.BaseResponse
  * History:
 
  */
-data class TestBean(val avatarUrl:String): BaseResponse<MutableList<TestBean.Children>>() {
+data class LoginBean(val jwt:String?): BaseResponse<LoginBean>() {
+    val user: Children? = null
 
-    class Children(val id:String){
-        val children: List<Children>? = null
-        val menuFid: String? = null
+    class Children(val account:String){
+        val companyId: String? = null
+        val companyName: String? = null
         val menuIcon: String? = null
         val menuLevel = 0
         val menuName: String? = null
@@ -24,5 +25,5 @@ data class TestBean(val avatarUrl:String): BaseResponse<MutableList<TestBean.Chi
         val menuType = 0
         val menuUrl: String? = null
     }
-}
 
+}

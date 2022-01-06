@@ -23,9 +23,12 @@ class LogInterceptor:Interceptor {
 
         val mediaType = response.body?.contentType()
         val content = response.body?.string()
+        val headers = response.headers
+//        LogTag.d("headers: $headers")
         val mBody = content?.toResponseBody(mediaType)
         LogTag.d("request_content： "+chain.request().toString())
         LogTag.d("$duration ms,body: $content")
+
         return response.newBuilder().body(mBody).build()
     }
 }

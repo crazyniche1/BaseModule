@@ -1,14 +1,16 @@
 package com.crazy.baseimagegallery.template
 
+import RequestGenerateUtils
 import android.text.Editable
 import android.text.TextWatcher
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
+import com.crazy.baseimagegallery.http.net.GsonUtil
 import com.crazy.baseimagegallery.http.net.NetManager
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.lang.Exception
+
 
 class TMainActivity : BaseActivity<ActivityMainBinding>() {
 
@@ -33,15 +35,18 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
     private fun requestNet() {
         GlobalScope.launch {
             try {
-                val ss = NetManager.initRetrofit.homeBanner()
-                val  data =ss.data
-                for ((i,e) in data?.withIndex()!!){
-                    data[i]
-                }
-                LogTag.d("Data${ss.data}")
+                val hashMap = RequestGenerateUtils.requestParams()
+                hashMap["username"] = "shuangan001"
+                hashMap["password"] ="123456abc"
+
+                val a = RequestGenerateUtils. requestBody(hashMap)
+                val ss =NetManager.instance.initRetrofit.homeLogin(a)
+//                LogTag.d("commonetsCircle:" + GsonUtil.create().toJson(ss))
+//                val  data =ss.data
+//                LogTag.d("Data_____$data")
 
             }catch (e:Exception){
-                LogTag.e("Data${e}")
+                LogTag.e("Data_EX:${e}")
             }
 
         }

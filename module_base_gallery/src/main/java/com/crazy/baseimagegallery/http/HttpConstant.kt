@@ -11,5 +11,5 @@ package com.crazy.baseimagegallery.http
  */
 object HttpConstant {
 
-    const val BaseUrl  = "https://www.wanandroid.com"
+    const val BaseUrl  = "http://10.8.6.61:81/"
 }

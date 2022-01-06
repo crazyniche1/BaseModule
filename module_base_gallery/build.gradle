@@ -127,6 +127,6 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:$rootProject.arouterVersion"
 
     //屏幕适配
-    implementation "com.github.JessYanCoding:AndroidAutoSize:$rootProject.AndroidAutoSizeVersion "
+    implementation "com.github.JessYanCoding:AndroidAutoSize:$rootProject.AndroidAutoSizeVersion"
 
 }

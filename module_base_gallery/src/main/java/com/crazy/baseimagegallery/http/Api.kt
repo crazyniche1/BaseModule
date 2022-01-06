@@ -1,6 +1,9 @@
 package com.crazy.baseimagegallery.http
 
+import com.crazy.baseimagegallery.http.test.LoginBean
 import com.crazy.baseimagegallery.http.test.TestBean
+import okhttp3.RequestBody
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -13,7 +16,12 @@ import retrofit2.http.POST
  * History:
 
  */
+
 interface Api {
-    @POST("/banner/json")
+    @GET("/api/v1/user/menu/tree/after-login")
     suspend fun homeBanner ():TestBean
+
+    @POST("/api/v1/user/login-saas")
+    suspend fun homeLogin (@Body rs:RequestBody ): LoginBean
+
 }

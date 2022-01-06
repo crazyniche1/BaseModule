@@ -17,11 +17,11 @@ import java.util.concurrent.TimeUnit
  * History:
 
  */
-object NetManager {
-    val readTimeout:Long = 10 *1000
-    val writeTimeout:Long = 10 *1000
-    val connectTimeout:Long = 10 *1000
-    val timeType:TimeUnit = TimeUnit.SECONDS
+class NetManager {
+    private val  readTimeout:Long = 10 *1000
+    private val writeTimeout:Long = 10 *1000
+    private val connectTimeout:Long = 10 *1000
+    private val timeType:TimeUnit = TimeUnit.SECONDS
     /**
      * 懒加载初始化 retrofit
      */
@@ -43,10 +43,22 @@ object NetManager {
             .readTimeout(readTimeout, timeType)
             .writeTimeout(writeTimeout, timeType)
             .connectTimeout(connectTimeout, timeType)
+//            .cookieJar(CustomCookie())
             //设置打印拦截日志
 //            .addNetworkInterceptor (httpLoggingInterceptor)
-            .addInterceptor(LogInterceptor())
+//            .addInterceptor(AddParameterInterceptor())
+            .addInterceptor(AddHeaderInterceptor())
+            .addNetworkInterceptor(LogInterceptor())
             .build()
+    }
+
+    /**
+     * 懒加载  同步锁  双重校验
+     */
+    companion object {
+        val instance by lazy (LazyThreadSafetyMode.SYNCHRONIZED){
+            NetManager()
+        }
     }
 
 }
