@@ -11,10 +11,10 @@ import com.crazy.baseimagegallery.http.bean.BaseResponse
  * History:
 
  */
-data class LoginBean(val jwt:String?): BaseResponse<LoginBean>() {
-    val user: Children? = null
-
-    class Children(val account:String){
+data class LoginBean(val jwt:String?,
+                    val user: Children?) {
+     class Children{
+        val account:String? = null
         val companyId: String? = null
         val companyName: String? = null
         val menuIcon: String? = null
@@ -25,5 +25,5 @@ data class LoginBean(val jwt:String?): BaseResponse<LoginBean>() {
         val menuType = 0
         val menuUrl: String? = null
     }
-
 }
+

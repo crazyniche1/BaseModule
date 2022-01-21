@@ -1,4 +1,4 @@
-package com.crazy.baseimagegallery.http.net
+package com.crazy.baseimagegallery.http.net.interceptor
 
 import okhttp3.*
 

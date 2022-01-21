@@ -11,18 +11,19 @@ import com.crazy.baseimagegallery.http.bean.BaseResponse
  * History:
 
  */
-data class TestBean(val avatarUrl:String): BaseResponse<MutableList<TestBean.Children>>() {
+data class TestBean(val children:List<Children>?)
+   {
 
-    class Children(val id:String){
-        val children: List<Children>? = null
-        val menuFid: String? = null
-        val menuIcon: String? = null
+    class Children(val id:String ?){
+        val children: List<Children> = mutableListOf()
+        val menuFid: String = ""
+        val menuIcon: String = ""
         val menuLevel = 0
-        val menuName: String? = null
+        val menuName: String = ""
         val menuOrder = 0
         val menuStatus = 0
         val menuType = 0
-        val menuUrl: String? = null
+        val menuUrl: String = ""
     }
 }
 

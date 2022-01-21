@@ -24,24 +24,24 @@ object ToastUtil {
     }
 
     //普通展示
-    private fun show(cs: CharSequence, duration: Int) {
+    private fun mShow(cs: CharSequence, duration: Int) {
         Toast.makeText(mAapplication,cs,duration).show()
     }
 
     private fun show(t:String, duration: Int) {
-        show(if (t.isNullOrEmpty()) "" else t,duration)
+        mShow(if (t.isNullOrEmpty()) "" else t,duration)
     }
 
     fun showShort(@StringRes resId:Int) {
         LogTag.d(""+mAapplication)
-        mAapplication?.resources?.let { show(it?.getText(resId),Toast.LENGTH_SHORT) }
+        mAapplication?.resources?.let { mShow(it?.getText(resId),Toast.LENGTH_SHORT) }
     }
 
     fun showShort(t:String) {
         show(t,Toast.LENGTH_SHORT)
     }
     fun showLong(@StringRes resId:Int) {
-        mAapplication?.resources?.let { show(it?.getText(resId),Toast.LENGTH_LONG) }
+        mAapplication?.resources?.let { mShow(it?.getText(resId),Toast.LENGTH_LONG) }
     }
     fun showLong(t:String) {
         show(t,Toast.LENGTH_LONG)

@@ -1,4 +1,4 @@
-package com.crazy.baseimagegallery.http.net
+package com.crazy.baseimagegallery.http.net.cookie
 
 import android.os.Build
 import androidx.annotation.RequiresApi

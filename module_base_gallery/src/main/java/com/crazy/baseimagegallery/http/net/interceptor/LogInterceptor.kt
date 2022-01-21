@@ -1,4 +1,4 @@
-package com.crazy.baseimagegallery.http.net
+package com.crazy.baseimagegallery.http.net.interceptor
 
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import okhttp3.Interceptor
@@ -23,8 +23,6 @@ class LogInterceptor:Interceptor {
 
         val mediaType = response.body?.contentType()
         val content = response.body?.string()
-        val headers = response.headers
-//        LogTag.d("headers: $headers")
         val mBody = content?.toResponseBody(mediaType)
         LogTag.d("request_content： "+chain.request().toString())
         LogTag.d("$duration ms,body: $content")

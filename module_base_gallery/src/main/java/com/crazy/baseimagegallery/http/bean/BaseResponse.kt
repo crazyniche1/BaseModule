@@ -1,5 +1,7 @@
 package com.crazy.baseimagegallery.http.bean
 
+import com.google.gson.annotations.SerializedName
+
 /**
  * Copyright (C), 2015-2021, 博彦科技
  * FileName: BaseResponse
@@ -9,9 +11,8 @@ package com.crazy.baseimagegallery.http.bean
  * History:
 
  */
-open class BaseResponse<T>:BaseBean(){
-     val code: String ?=null
-     val msg: String ?=null
-     val data: T ?=null
-     val status: String ?=null
-}
+data class BaseResponse<T>(
+   val code: Int = -1,
+   val msg: String? = "",
+   val data: T? = null
+) :BaseBean()

@@ -1,7 +1,9 @@
 package com.crazy.baseimagegallery.http.net
 
-import com.crazy.baseimagegallery.http.Api
+import com.crazy.baseimagegallery.http.ApiService
 import com.crazy.baseimagegallery.http.HttpConstant
+import com.crazy.baseimagegallery.http.net.interceptor.AddHeaderInterceptor
+import com.crazy.baseimagegallery.http.net.interceptor.LogInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * History:
 
  */
-class NetManager {
+ class  NetManager {
     private val  readTimeout:Long = 10 *1000
     private val writeTimeout:Long = 10 *1000
     private val connectTimeout:Long = 10 *1000
@@ -25,7 +27,7 @@ class NetManager {
     /**
      * 懒加载初始化 retrofit
      */
-     val initRetrofit :Api by lazy {
+     val  initRetrofit :ApiService by lazy {
          Retrofit.Builder()
             .baseUrl(HttpConstant.BaseUrl)
                 //序列化反序列化转化提供工厂
@@ -33,7 +35,7 @@ class NetManager {
 //            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(initHttpClient())
             .build()
-            .create(Api::class.java)
+            .create(ApiService::class.java)
     }
 
     private fun initHttpClient(): OkHttpClient {
@@ -45,10 +47,14 @@ class NetManager {
             .connectTimeout(connectTimeout, timeType)
 //            .cookieJar(CustomCookie())
             //设置打印拦截日志
-//            .addNetworkInterceptor (httpLoggingInterceptor)
+            .addNetworkInterceptor (httpLoggingInterceptor)
 //            .addInterceptor(AddParameterInterceptor())
             .addInterceptor(AddHeaderInterceptor())
             .addNetworkInterceptor(LogInterceptor())
+
+                //忽略ssl
+//            .sslSocketFactory(SSLHttpsUtils.initSSLContext(),SSLHttpsUtils.getTrustManager())
+//            .hostnameVerifier(SSLHttpsUtils.getHostnameVerifier())
             .build()
     }
 
@@ -59,6 +65,12 @@ class NetManager {
         val instance by lazy (LazyThreadSafetyMode.SYNCHRONIZED){
             NetManager()
         }
+
+         fun get():ApiService{
+            return instance.initRetrofit
+        }
     }
+
+
 
 }

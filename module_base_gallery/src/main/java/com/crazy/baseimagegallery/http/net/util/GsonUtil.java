@@ -1,4 +1,4 @@
-package com.crazy.baseimagegallery.http.net;
+package com.crazy.baseimagegallery.http.net.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

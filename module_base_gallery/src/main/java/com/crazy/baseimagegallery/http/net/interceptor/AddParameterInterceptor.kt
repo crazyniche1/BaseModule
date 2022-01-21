@@ -1,4 +1,4 @@
-package com.crazy.baseimagegallery.http.net
+package com.crazy.baseimagegallery.http.net.interceptor
 
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import okhttp3.*
@@ -39,7 +39,7 @@ class AddParameterInterceptor:Interceptor {
 
                 for (i in 0 until mFormBody.size) {
                     fb.addEncoded(mFormBody.encodedName(i), mFormBody.encodedValue(i))
-                    LogTag.d("headers ${mFormBody.encodedName(i)+"-----"+mFormBody.encodedValue(i)}")
+//                    LogTag.d("headers ${mFormBody.encodedName(i)+"-----"+mFormBody.encodedValue(i)}")
                 }
             }
 
@@ -60,8 +60,6 @@ class AddParameterInterceptor:Interceptor {
         val rs = chain.proceed(requestBuilder.build())
 
         LogTag.d("-------------"+(requestBuilder.build().body is MultipartBody))
-        LogTag.d("-------------"+requestBuilder.build().headers)
-        LogTag.d("-------------"+requestBuilder.build().url)
         return rs
     }
 

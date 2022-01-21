@@ -1,3 +1,5 @@
+package com.crazy.baseimagegallery.http.net.util
+
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.google.gson.GsonBuilder
 import okhttp3.MediaType.Companion.parse
@@ -7,7 +9,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 
 /**
  * Copyright (C), 2015-2022, 博彦科技
- * FileName: RequestGenerateUtils
+ * FileName: com.crazy.baseimagegallery.http.net.util.RequestGenerateUtils
  * Author: zy
  * Date: 2022/1/5 15:46
  * Description: 请求体

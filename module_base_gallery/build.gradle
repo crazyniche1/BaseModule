@@ -129,4 +129,10 @@ dependencies {
     //屏幕适配
     implementation "com.github.JessYanCoding:AndroidAutoSize:$rootProject.AndroidAutoSizeVersion"
 
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+    //liveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
+
 }

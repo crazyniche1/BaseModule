@@ -67,4 +67,6 @@ ext{
     keyPassword             = 'mbgjks'
     storePassword           = 'mbgjks'
 
+    lifecycleVersion        = "2.4.0"
+
 }
