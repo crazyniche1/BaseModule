@@ -16,3 +16,7 @@ data class BaseResponse<T>(
    val msg: String? = "",
    val data: T? = null
 ) :BaseBean()
+
+enum class State {
+    Success, Error
+}

@@ -32,6 +32,7 @@ class ApiException(
            const val CODE_SERVER_ERROR = 5000
 
            const val CODE_AUTH_INVALID = 401
+           const val CODE_SUCCESS = 200
 
            fun build(e:Throwable): ApiException {
                return when(e){

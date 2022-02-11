@@ -1,9 +1,6 @@
 package com.crazy.baseimagegallery.template
 
 import com.crazy.baseimagegallery.http.net.util.RequestGenerateUtils
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.annotation.MainThread
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
@@ -13,6 +10,8 @@ import com.crazy.baseimagegallery.util.toast.ToastUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import androidx.lifecycle.ViewModelProvider
+import com.crazy.baseimagegallery.mvvm.TestViewMode
 
 
 class TMainActivity : BaseActivity<ActivityMainBinding>() {
@@ -27,7 +26,7 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
         viewBing.button.setOnClickListener {
 //            SharedUtil<Any>(this,).image("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png?imageMogr2/auto-orient/strip|imageView2/2/w/345/format/webp")
 //            requestNet()
-            showLoading()
+//            showLoading()
             viewBing.button.postDelayed({
                 dismissLoading()
             },3000L)
@@ -73,6 +72,19 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initData() {
 
+        //get vm
+        val vmp = ViewModelProvider(this)
+        val tvVM= vmp[TestViewMode::class.java]
+        tvVM.test1Request()
+
+        tvVM.mWanLiveData.observe(this){
+            for (i in it.withIndex()){
+                LogTag.d("test:::"+tvVM.mWanLiveData.toString())
+            }
+        }
+        tvVM.errorInfo.observe(this){
+            LogTag.d("err_test:::"+it.toString())
+        }
     }
 
 }

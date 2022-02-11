@@ -2,6 +2,7 @@ package com.crazy.baseimagegallery.http.net
 
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.http.bean.BaseResponse
+import com.crazy.baseimagegallery.http.test.JinashuBean
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -16,7 +17,7 @@ import kotlinx.coroutines.withContext
  * History:
 
  */
-suspend inline fun<T>  apiCall(crossinline call:suspend CoroutineScope.() ->BaseResponse<T>): BaseResponse<T> {
+suspend inline fun<T>  apiCall(crossinline call: suspend CoroutineScope.() ->BaseResponse<T>): BaseResponse<T> {
     return withContext(Dispatchers.IO){
         var res:BaseResponse<T>
 
