@@ -1,11 +1,10 @@
-package com.crazy.baseimagegallery.mvvm
+package com.crazy.baseimagegallery.mvvm.vm
 
+import androidx.annotation.NonNull
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.crazy.baseimagegallery.http.bean.BaseResponse
-import com.crazy.baseimagegallery.http.net.ApiException
-import com.crazy.baseimagegallery.http.net.apiCall
-import com.crazy.baseimagegallery.http.test.TestBean
+import com.crazy.baseimagegallery.mvvm.WanRepository
 import com.crazy.baseimagegallery.util.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +21,9 @@ import kotlinx.coroutines.launch
 abstract class BaseViewMode:ViewModel() {
      val showLoad = SingleLiveEvent<Boolean>()
      val rs = WanRepository()
+
+    var mActivityProvider: ViewModelProvider? = null
+    val mApplicationProvider: ViewModelProvider? = null
 
     /**
      * 开始加载

@@ -31,6 +31,12 @@
             android:name=".template.TMainActivity"
             android:theme="@style/Theme.CommonApplication.NoActionBar">
 
+        </activity>
+
+        <activity
+            android:name=".template.TtMainActivity"
+            android:theme="@style/Theme.CommonApplication.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

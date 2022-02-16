@@ -1,12 +1,11 @@
 package com.crazy.baseimagegallery.template
 
 import com.beyondsoft.smarthome.utils.logs.LogTag
-import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
-import androidx.lifecycle.ViewModelProvider
+import com.crazy.baseimagegallery.mvvm.view.BaseVMActivity
 
 
-class TMainActivity : BaseActivity<ActivityMainBinding>() {
+class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
 
     override fun getViewBinding(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
@@ -30,8 +29,10 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initData() {
 
         //get vm
-        val vmp = ViewModelProvider(this)
-        val tvVM= vmp[TestViewMode::class.java]
+//        val vmp = ViewModelProvider(this)
+//        val tvVM= vmp[TestViewMode::class.java]
+        val tvVM= getActivityScopeViewModel(TestViewMode::class.java)
+
         tvVM.test1Request()
 
         tvVM.mWanLiveData.observe(this){
@@ -42,6 +43,8 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
         tvVM.errorInfo.observe(this){
             LogTag.d("err_test:::"+it.toString())
         }
+
+
     }
 
 }

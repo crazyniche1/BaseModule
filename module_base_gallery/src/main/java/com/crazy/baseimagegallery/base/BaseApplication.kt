@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import com.alibaba.android.arouter.launcher.ARouter
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.BuildConfig
@@ -28,7 +30,7 @@ import javax.inject.Inject
  * Description: application基类
  * History:
  */
-class BaseApplication : Application() , HasActivityInjector {
+class BaseApplication : Application() , HasActivityInjector , ViewModelStoreOwner {
 
     @Inject
     internal lateinit var activityDispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
@@ -46,6 +48,7 @@ class BaseApplication : Application() , HasActivityInjector {
         initARouter()
 
         initBugly()
+
     }
 
     private fun initBugly() {
@@ -101,5 +104,7 @@ class BaseApplication : Application() , HasActivityInjector {
     }
 
     override fun activityInjector(): AndroidInjector<Activity> =activityDispatchingAndroidInjector
+
+    override fun getViewModelStore(): ViewModelStore = ViewModelStore()
 
 }

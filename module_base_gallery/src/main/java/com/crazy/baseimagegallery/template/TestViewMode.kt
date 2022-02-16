@@ -1,9 +1,10 @@
-package com.crazy.baseimagegallery.mvvm
+package com.crazy.baseimagegallery.template
 
 import androidx.lifecycle.MutableLiveData
 import com.crazy.baseimagegallery.http.net.ApiException
 import com.crazy.baseimagegallery.http.net.apiCall
 import com.crazy.baseimagegallery.http.test.TestBean
+import com.crazy.baseimagegallery.mvvm.vm.BaseViewMode
 
 /**
  * Copyright (C), 2015-2022, 博彦科技
@@ -29,5 +30,7 @@ class TestViewMode : BaseViewMode() {
             }
         }
     }
+
+
 
 }
