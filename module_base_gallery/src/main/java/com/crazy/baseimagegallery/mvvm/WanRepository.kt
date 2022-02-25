@@ -11,6 +11,7 @@ import com.crazy.baseimagegallery.http.test.TestBean
  * Author: zy
  * Date: 2022/1/24 17:43
  * Description: 数据源仓库
+ * 同时可以在仓库中进行 Http的初始化
  * History:
 
  */

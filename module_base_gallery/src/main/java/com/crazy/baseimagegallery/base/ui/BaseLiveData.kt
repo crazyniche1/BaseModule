@@ -18,12 +18,12 @@ class BaseLiveData<T>(t: Any) : LiveData<T>() {
         postValue(it)
     }
 
-
+    //活跃
     override fun onActive() {
         super.onActive()
     }
 
-
+    //不活跃
     override fun onInactive() {
         super.onInactive()
     }

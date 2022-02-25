@@ -1,6 +1,7 @@
 package com.crazy.baseimagegallery.template
 
 import com.crazy.baseimagegallery.base.ui.adapter.BaseItemBindingAdapter
+import com.crazy.baseimagegallery.databinding.ItemBinding
 
 
 /**
@@ -12,12 +13,12 @@ import com.crazy.baseimagegallery.base.ui.adapter.BaseItemBindingAdapter
  * History:
 
  */
-//class ViewBindTadapter (dataSet:MutableList<HashMap<Int,String>>):
-//    BaseItemBindingAdapter<ItemStringBinding,
-//            HashMap<Int, String>>(ItemStringBinding::inflate,dataSet){
-//
-//    override fun mOnBindViewHolder(vb: ItemStringBinding, position: Int, get: HashMap<Int,String>) {
-////        vb.tvr.text = get[position]
-//    }
-//}
+class ViewBindTadapter (dataSet:MutableList<HashMap<Int,String>>):
+    BaseItemBindingAdapter<ItemBinding,
+            HashMap<Int, String>>(ItemBinding::inflate,dataSet){
+
+    override fun mOnBindViewHolder(vb: ItemBinding, position: Int, get: HashMap<Int,String>) {
+        vb.tvr.text = position.toString()
+    }
+}
 

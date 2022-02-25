@@ -29,19 +29,19 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun initData() {
 
-        //get vm
-        val vmp = ViewModelProvider(this)
-        val tvVM= vmp[TestViewMode::class.java]
-        tvVM.test1Request()
-
-        tvVM.mWanLiveData.observe(this){
-            for (i in it.withIndex()){
-                LogTag.d("test:::"+tvVM.mWanLiveData.toString())
-            }
-        }
-        tvVM.errorInfo.observe(this){
-            LogTag.d("err_test:::"+it.toString())
-        }
+//        //get vm
+//        val vmp = ViewModelProvider(this)
+//        val tvVM= vmp[TestViewMode::class.java]
+//        tvVM.test1Request()
+//
+//        tvVM.mWanLiveData.observe(this){
+//            for (i in it.withIndex()){
+//                LogTag.d("test:::"+tvVM.mWanLiveData.toString())
+//            }
+//        }
+//        tvVM.errorInfo.observe(this){
+//            LogTag.d("err_test:::"+it.toString())
+//        }
     }
 
 }

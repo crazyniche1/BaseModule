@@ -20,15 +20,19 @@ class TestViewMode : BaseViewMode() {
      val mWanLiveData = MutableLiveData<List<TestBean>>()
      val errorInfo = MutableLiveData<String>()
 
-    fun test1Request() {
+    fun test1Request(): TestViewMode {
 
-        launchRequest {
-            val request = apiCall { rs.testData() }
+        launchRequest (true){
+            val request = apiCall {
+                rs.testData()
+            }
             when(request.code){
                 ApiException.CODE_SUCCESS ->mWanLiveData.value = request.data!!
                 else ->errorInfo.value = request.msg.toString()
             }
         }
+
+        return this
     }
 
 

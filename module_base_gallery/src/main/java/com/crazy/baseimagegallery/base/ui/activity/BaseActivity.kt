@@ -13,7 +13,6 @@ import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
 import com.crazy.baseimagegallery.databinding.LayoutBaseBinding
 import com.crazy.baseimagegallery.template.TMainActivity
-import com.crazy.baseimagegallery.util.CommonUtil
 import com.crazy.baseimagegallery.util.StateView
 import com.crazy.baseimagegallery.util.activity.ActivityManager
 import com.gyf.immersionbar.ImmersionBar
@@ -31,7 +30,8 @@ import com.gyf.immersionbar.ImmersionBar
 abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
 
     /** 视图绑定布局 */
-    lateinit var viewBing: V
+    private var _binding: V? =null
+    val viewBing get() = _binding!!
 
     lateinit var baseBinding: LayoutBaseBinding
 
@@ -80,13 +80,17 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
      */
     open fun isSetPaddingTop(): Boolean = true
 
+    /**
+     * 这里可以使用反射加 扩展函数
+     * 参考 郭林文章：https://blog.csdn.net/c10WTiybQ1Ye3/article/details/112690188
+     * */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         mContext = this
         //加入Activity管理器
         ActivityManager.instance.addActivity(this)
-        viewBing = getViewBinding()
+        _binding = getViewBinding()
         setContentView(viewBing.root)
 
         if (isSetStateBar()) {
@@ -104,7 +108,7 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewBing==null
+        _binding=null
         ActivityManager.instance.removeActivity(this)
     }
     /**

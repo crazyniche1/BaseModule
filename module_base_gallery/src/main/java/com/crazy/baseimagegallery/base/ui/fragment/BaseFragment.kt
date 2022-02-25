@@ -5,14 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
 import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.util.StateView
 
-abstract class BaseFragment :Fragment() {
+/**
+ * 2.22.2.25 通过抽象接口获取R.layout.id 变为ViewBing 模式
+ */
+abstract class BaseFragment <VB: ViewBinding>  :Fragment() {
 
     /** 多状态布局View*/
     private var statusView: StateView? = null
-    private lateinit var  rootView: View
+    private var _binding: VB? = null
+    val viewBing get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,11 +25,10 @@ abstract class BaseFragment :Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-         rootView = inflater.inflate(getLayoutId(),null)
-        return rootView
+//         rootView = inflater.inflate(getLayoutId(),null)
+        _binding = getViewBinding()
+        return viewBing.root
     }
-
-     abstract fun getLayoutId():Int
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +40,11 @@ abstract class BaseFragment :Fragment() {
         initView ()
         initData ()
 
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     /** 显示Loading*/
@@ -52,7 +60,7 @@ abstract class BaseFragment :Fragment() {
     open fun isSetStateView(): Boolean = true
 
     private fun setStatusLayout() {
-        val contentView: ViewGroup? = rootView.findViewById(R.id.content_id)
+        val contentView: ViewGroup? = viewBing.root.findViewById(R.id.content_id)
         if (contentView != null) {
             statusView = StateView.inject(contentView)
         }
@@ -60,4 +68,6 @@ abstract class BaseFragment :Fragment() {
 
     abstract fun initView()
     abstract fun initData()
+
+    abstract fun getViewBinding(): VB
 }

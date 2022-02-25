@@ -32,7 +32,6 @@
             android:theme="@style/Theme.CommonApplication.NoActionBar">
 
         </activity>
-
         <activity
             android:name=".template.TtMainActivity"
             android:theme="@style/Theme.CommonApplication.NoActionBar">
