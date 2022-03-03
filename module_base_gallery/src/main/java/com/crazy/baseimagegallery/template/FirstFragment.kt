@@ -1,5 +1,8 @@
 package com.crazy.baseimagegallery.template
 
+import android.view.LayoutInflater
+import android.view.Menu
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.base.ui.fragment.BaseFragment
 import com.crazy.baseimagegallery.databinding.FragmentMainBinding
@@ -20,7 +23,23 @@ class FirstFragment:BaseFragment<FragmentMainBinding>() {
     }
 
     override fun initData() {
-        viewBing.button.text = "我是你爸爸"
+
+         val  groupId =0
+        //底部导航
+        viewBing.bnvMenu.menu.add(groupId,0,Menu.NONE,"首页1")
+        viewBing.bnvMenu.menu.add(groupId,1,Menu.NONE,"首页2")
+        viewBing.bnvMenu.menu.add(groupId,2,Menu.NONE,"首页3")
+//            LogTag.d(""+it.itemId)
+        viewBing.bnvMenu.setOnNavigationItemSelectedListener { item ->
+            LogTag.d("" + item.itemId)
+            return@setOnNavigationItemSelectedListener true
+        }
+
+        viewBing.tvTest.setOnClickListener {
+
+
+        }
+
     }
 
     override fun getViewBinding() = FragmentMainBinding.inflate(this.layoutInflater)

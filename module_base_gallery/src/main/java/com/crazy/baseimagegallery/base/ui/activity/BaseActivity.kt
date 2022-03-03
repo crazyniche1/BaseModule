@@ -102,8 +102,13 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
             setStatusLayout()
         }
         initView()
-        initData()
+
         setListener()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        initData()
     }
 
     override fun onDestroy() {

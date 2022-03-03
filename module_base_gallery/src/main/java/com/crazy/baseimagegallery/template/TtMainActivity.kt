@@ -2,8 +2,11 @@ package com.crazy.baseimagegallery.template
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
+import android.widget.LinearLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -57,11 +60,16 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
             LogTag.d("err_test:::"+it.toString())
         }
 
-//        initRecycleView(buildRecycleViewData())
+        initRecycleView(buildRecycleViewData())
+
+        viewBing.button.setOnClickListener {
+            TestPopUpW(viewBing.tvTest){
+                LayoutInflater.from(this).inflate(R.layout.window_base_pop,LinearLayout(this))
+            }.show()
+        }
+
+
     }
-
-
-
 
     private fun buildRecycleViewData():MutableList<HashMap<Int,String>>{
         val dataSet = mutableListOf<HashMap<Int,String>>()
@@ -73,11 +81,11 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
         return dataSet
     }
     private fun initRecycleView(dataSet:MutableList<HashMap<Int,String>>){
-        var mdt = ViewBindTadapter(dataSet)
-        val rv = viewBing?.rvRvList
+        val mdt = ViewBindTadapter(dataSet)
+        val rv = viewBing.rvRvList
 
-        rv?.adapter = mdt
-        rv?.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        rv.adapter = mdt
+        rv.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
 
 
     }

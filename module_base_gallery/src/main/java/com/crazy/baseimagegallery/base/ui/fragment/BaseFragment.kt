@@ -11,7 +11,10 @@ import com.crazy.baseimagegallery.util.StateView
 
 /**
  * 2.22.2.25 通过抽象接口获取R.layout.id 变为ViewBing 模式
- */
+ *
+ * 或参考Navigation 导航，，可视化，自动处理 集中处理 ；
+ * 但如果业务需求变态，可自定义一个管理Fragment的容器进行管理；
+*/
 abstract class BaseFragment <VB: ViewBinding>  :Fragment() {
 
     /** 多状态布局View*/
