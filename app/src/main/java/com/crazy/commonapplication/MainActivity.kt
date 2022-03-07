@@ -106,7 +106,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (keyCode==KeyEvent.KEYCODE_BACK ) {
             if((System.currentTimeMillis().minus(mExitTime).compareTo(2000)) >0){
                 mExitTime=System.currentTimeMillis()
-                ToastUtil.showShort(R.string.main_exit_app)
+                ToastUtil.showShort(R.string.app_name)
 
             }else{
                 CommonUtil.exitApp()

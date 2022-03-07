@@ -62,7 +62,7 @@
             android:id="@+id/tv_test"
             android:textColor="@color/red"
             android:padding="10dp"
-            android:text="@string/main_exit_app"
+            android:text="@string/module_base_gallery_main_exit_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <TextView

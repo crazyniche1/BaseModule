@@ -1,9 +1,11 @@
 package com.crazy.baseimagegallery.base.ui.activity
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.KeyEvent
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -105,6 +107,10 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
 
         setListener()
     }
+
+//    fun <VB : ViewBinding>  Activity.xxx(inflate:(LayoutInflater)->VB) {
+//        inflate(layoutInflater).root
+//    }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()

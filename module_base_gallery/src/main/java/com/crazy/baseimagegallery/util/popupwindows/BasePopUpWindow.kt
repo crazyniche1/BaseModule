@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import android.widget.PopupWindow
 import androidx.core.widget.PopupWindowCompat
+import androidx.viewbinding.ViewBinding
 import org.jetbrains.annotations.TestOnly
 
 
@@ -17,13 +18,15 @@ import org.jetbrains.annotations.TestOnly
  * Date: 2022/2/28 17:03
  * Description:
  *  目前不支持  内部嵌套EditView
+ *  2022.03.07 new add viewBinding 需要优化 ，继承的类传参过复杂
  * History:
 
  */
- abstract  class BasePopUpWindow(var anchorView:View,block:()->View): PopUpWindowCallback {
+abstract class BasePopUpWindow <VB: ViewBinding>: PopUpWindowCallback {
 
-
-    private var layoutView:View = block()
+//    private val layoutView:View = block()
+//    private val binding: VB by lazy {inflate(layoutInflater)}
+    lateinit var anchorView:View
 
     private var pw: PopupWindow? = null
     /**
@@ -34,13 +37,17 @@ import org.jetbrains.annotations.TestOnly
         initView(ViewGroup.LayoutParams.WRAP_CONTENT,  ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
+
     /**
      * isTouchable 获取焦点
      * isOutsideTouchable响应Windows外部点击
      */
     @SuppressLint("ClickableViewAccessibility")
     private fun initView(width:Int, height:Int) {
-        pw =PopupWindow(layoutView,width, height,true)
+        if (anchorView==null){
+            Exception("the view on which to pin the popup window is not  null ")
+        }
+        pw =PopupWindow(onBindingAndAnchor().root,width, height,true)
         PopupWindowCompat.showAsDropDown(pw!!,anchorView, 10, 10,  Gravity.CENTER)
         pw?.setBackgroundDrawable(ColorDrawable(0x00000000))
 
@@ -73,7 +80,7 @@ import org.jetbrains.annotations.TestOnly
         }
         onBack()
 
-        getView(layoutView)
+        getView(onBindingAndAnchor())
 
     }
 
@@ -104,7 +111,9 @@ import org.jetbrains.annotations.TestOnly
         pw?.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
     }
 
-    abstract fun getView(layoutView:View )
+    abstract fun getView(layoutView:VB )
+    // viewBinding 绑定 和 传入加载视图
+    abstract fun onBindingAndAnchor() :VB
 
     override fun show() {
         if (pw?.isShowing != true){

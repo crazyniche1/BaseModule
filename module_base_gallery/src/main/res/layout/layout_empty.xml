@@ -31,7 +31,7 @@
         android:gravity="center"
         android:paddingStart="21dp"
         android:paddingEnd="21dp"
-        android:text="@string/refresh_try_again"
+        android:text="@string/module_base_gallery_refresh_try_again"
         android:textColor="@color/white"
         android:visibility="gone" />
 
