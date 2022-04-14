@@ -2,6 +2,7 @@ package com.crazy.baseimagegallery.util
 
 import android.Manifest.permission
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.KeyguardManager
 import android.content.Context
 import android.content.pm.ActivityInfo
@@ -15,7 +16,6 @@ import android.util.DisplayMetrics
 import android.view.Surface
 import android.view.WindowManager
 import androidx.annotation.RequiresPermission
-import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Copyright (C), 2015-2022, 博彦科技
@@ -79,7 +79,7 @@ class ScreenUtils {
      *
      * @param activity The activity.
      */
-    fun setFullScreen(activity: AppCompatActivity) {
+    fun setFullScreen(activity: Activity) {
         activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
@@ -88,7 +88,7 @@ class ScreenUtils {
      *
      * @param activity The activity.
      */
-    fun setNonFullScreen(activity: AppCompatActivity) {
+    fun setNonFullScreen(activity: Activity) {
         activity.window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
@@ -97,7 +97,7 @@ class ScreenUtils {
      *
      * @param activity The activity.
      */
-    fun toggleFullScreen(activity: AppCompatActivity) {
+    fun toggleFullScreen(activity: Activity) {
         val fullScreenFlag = WindowManager.LayoutParams.FLAG_FULLSCREEN
         val window = activity.window
         if (window.attributes.flags and fullScreenFlag == fullScreenFlag) {
@@ -119,7 +119,7 @@ class ScreenUtils {
      * @param activity The activity.
      * @return `true`: yes<br></br>`false`: no
      */
-    fun isFullScreen(activity: AppCompatActivity): Boolean {
+    fun isFullScreen(activity: Activity): Boolean {
         val fullScreenFlag = WindowManager.LayoutParams.FLAG_FULLSCREEN
         return (activity.window.attributes.flags and fullScreenFlag) == fullScreenFlag
     }
@@ -139,7 +139,7 @@ class ScreenUtils {
      *
      * @param activity The activity.
      */
-    fun setLandscape(activity: AppCompatActivity) {
+    fun setLandscape(activity: Activity) {
         activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
     }
 
@@ -158,7 +158,7 @@ class ScreenUtils {
      *
      * @param activity The activity.
      */
-    fun setPortrait(activity: AppCompatActivity) {
+    fun setPortrait(activity: Activity) {
         activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
 
@@ -169,7 +169,7 @@ class ScreenUtils {
      * @return the rotation of screen
      */
     @SuppressLint("SwitchIntDef")
-    fun getScreenRotation(activity: AppCompatActivity): Int {
+    fun getScreenRotation(activity: Activity): Int {
         when (activity.windowManager.defaultDisplay.rotation) {
             Surface.ROTATION_90 -> return 90
             Surface.ROTATION_180 -> return 180
@@ -184,7 +184,7 @@ class ScreenUtils {
      * @param activity The activity.
      * @return the bitmap of screen
      */
-    fun screenShot(activity: AppCompatActivity): Bitmap? {
+    fun screenShot(activity: Activity): Bitmap? {
         return screenShot(activity, false)
     }
 
@@ -195,7 +195,7 @@ class ScreenUtils {
      * @param isDeleteStatusBar True to delete status bar, false otherwise.
      * @return the bitmap of screen
      */
-    fun screenShot(activity: AppCompatActivity, isDeleteStatusBar: Boolean): Bitmap? {
+    fun screenShot(activity: Activity, isDeleteStatusBar: Boolean): Bitmap? {
         val decorView = activity.window.decorView
         decorView.isDrawingCacheEnabled = true
         decorView.setWillNotCacheDrawing(false)

@@ -1,9 +1,12 @@
 package com.crazy.commonapplication.services
 
 import android.content.Context
+import android.content.Intent
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.beyondsoft.smarthome.utils.logs.LogTag
+import com.crazy.baseimagegallery.util.AppUtils
 import com.crazy.baseimagegallery.util.arouter.RouterPath
+import com.crazy.commonapplication.MyService
 
 /**
  * Copyright (C), 2015-2021, 博彦科技
@@ -15,14 +18,24 @@ import com.crazy.baseimagegallery.util.arouter.RouterPath
 
  */
 @Route(path = RouterPath.Service.s1,name = "测试服务")
-class LocalService:Sprovider {
+open class LocalService:Sprovider {
     override fun initService(name: String): String {
         LogTag.d("初始化接口${name}")
         return name
     }
 
+    /**
+     * startService  方式
+     */
     override fun init(context: Context?) {
-        LogTag.d("ARouter初始化函数${context.toString()}")
+        LogTag.d("ARouter初始化函数${Thread.currentThread().name}")
+
+        context.let {
+            if (!AppUtils(context!!).serviceIsRun(MyService::class.java.name)){
+                context?. startService(Intent(context!!, MyService::class.java))
+            }
+        }
+
     }
 
 

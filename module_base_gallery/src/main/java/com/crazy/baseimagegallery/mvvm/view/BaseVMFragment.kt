@@ -1,17 +1,11 @@
 package com.crazy.baseimagegallery.mvvm.view
 
-import android.app.Activity
-import android.content.res.Resources
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.crazy.baseimagegallery.base.BaseApplication
-import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.base.ui.fragment.BaseFragment
-import com.crazy.baseimagegallery.databinding.ActivityMainBinding
-import com.crazy.baseimagegallery.util.AdaptScreenUtils
-import com.crazy.baseimagegallery.util.ScreenUtils
 
 /**
  * Copyright (C), 2015-2022, 博彦科技

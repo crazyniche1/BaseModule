@@ -1,9 +1,7 @@
 package com.crazy.baseimagegallery.template
 
-import android.view.LayoutInflater
 import android.view.Menu
 import com.beyondsoft.smarthome.utils.logs.LogTag
-import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.base.ui.fragment.BaseFragment
 import com.crazy.baseimagegallery.databinding.FragmentMainBinding
 
@@ -37,7 +35,10 @@ class FirstFragment:BaseFragment<FragmentMainBinding>() {
 
         viewBing.tvTest.setOnClickListener {
 
+//            Glide.with(this).load("").placeholder().into(viewBing.ivImage)
+//            Observer
 
+//            activity.getSystemService()
         }
 
     }
