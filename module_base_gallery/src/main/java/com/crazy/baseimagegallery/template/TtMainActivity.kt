@@ -6,7 +6,6 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
-import android.widget.LinearLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -18,6 +17,7 @@ import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
 import com.crazy.baseimagegallery.mvvm.view.BaseVMActivity
+import java.util.zip.Inflater
 
 
 class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
@@ -57,15 +57,15 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
             }
         }
         tvVM.errorInfo.observe(this){
-            LogTag.d("err_test:::"+it.toString())
+            LogTag.d("err_test:::$it")
         }
 
-        initRecycleView(buildRecycleViewData())
+//        initRecycleView(buildRecycleViewData())
 
         viewBing.button.setOnClickListener {
-            TestPopUpW(viewBing.tvTest){
-                LayoutInflater.from(this).inflate(R.layout.window_base_pop,LinearLayout(this))
-            }.show()
+            TestPopUpW(viewBing.tvTest,layoutInflater).show()
+
+            TestDialog().show(this.supportFragmentManager)
         }
 
 
@@ -81,7 +81,7 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
         return dataSet
     }
     private fun initRecycleView(dataSet:MutableList<HashMap<Int,String>>){
-        val mdt = ViewBindTadapter(dataSet)
+        var mdt = ViewBindTadapter(dataSet)
         val rv = viewBing.rvRvList
 
         rv.adapter = mdt

@@ -12,4 +12,5 @@ import java.io.Serializable
 
  */
 open class BaseBean:Serializable {
+     val serialVersionUID =1L
 }

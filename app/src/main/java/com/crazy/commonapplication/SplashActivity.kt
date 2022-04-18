@@ -32,11 +32,13 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
     override fun initView() {
         hideBottomUIMenu()
+        LogTag.d("SplashActivity初始化函数${this
+            .toString()}")
     }
 
     override fun initData() {
 
-        object : CountDownTimer(countDownInterval,1000) {
+        object : CountDownTimer(countDownInterval,2000) {
             override fun onTick(millisUntilFinished: Long) {
             }
 
@@ -44,11 +46,12 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 //                val intent = Intent(mContext,MainActivity::class.java)
 //                startActivity(intent)
                 ARouter.getInstance().build(RouterPath.Home.home).navigation()
-                ARouter.getInstance().build(RouterPath.Service.s1).navigation()
-//                finish()
+
+                finish()
             }
         }.start()
     }
+
 
     /**
      *隐藏底部虚拟键并全屏

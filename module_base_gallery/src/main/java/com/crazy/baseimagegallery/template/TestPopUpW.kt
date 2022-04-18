@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.viewbinding.ViewBinding
 import com.crazy.baseimagegallery.R
+import com.crazy.baseimagegallery.databinding.ModuleBaseGalleryWindowBaseDialogBinding
 import com.crazy.baseimagegallery.util.popupwindows.BasePopUpWindow
 import com.crazy.baseimagegallery.util.toast.ToastUtil
 
@@ -20,17 +21,18 @@ import com.crazy.baseimagegallery.util.toast.ToastUtil
  * History:
 
  */
-class TestPopUpW(anchorView:View, block:()->View) :BasePopUpWindow(anchorView,block) {
+class TestPopUpW(private val av:View,private val lif:LayoutInflater) :BasePopUpWindow<ModuleBaseGalleryWindowBaseDialogBinding>() {
 
-    override fun getView(layoutView: View) {
-        val tc = layoutView.findViewById<TextView>(R.id.tx_cancel_label)
-        val ts = layoutView.findViewById<TextView>(R.id.tx_sure_label)
-
-        tc.setOnClickListener {
-            ToastUtil.showShort("tx_cancel_label")
-        }
-        ts.setOnClickListener {
-            ToastUtil.showShort("tx_sure_label")
+    override fun getView(layoutView: ModuleBaseGalleryWindowBaseDialogBinding) {
+        layoutView.txSureLabel.setOnClickListener {
+            ToastUtil.showShort("txSureLabel****")
         }
     }
+
+    override fun onBindingAndAnchor(): ModuleBaseGalleryWindowBaseDialogBinding {
+        //这里进行的set 赋值
+        anchorView = av
+        return  ModuleBaseGalleryWindowBaseDialogBinding.inflate(lif)
+    }
+
 }

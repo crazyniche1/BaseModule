@@ -1,18 +1,14 @@
 package com.crazy.baseimagegallery.base.ui.activity
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.KeyEvent
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.R
-import com.crazy.baseimagegallery.databinding.ActivityMainBinding
+import com.crazy.baseimagegallery.R.color.common_white
 import com.crazy.baseimagegallery.databinding.LayoutBaseBinding
-import com.crazy.baseimagegallery.template.TMainActivity
 import com.crazy.baseimagegallery.util.StateView
 import com.crazy.baseimagegallery.util.activity.ActivityManager
 import com.gyf.immersionbar.ImmersionBar
@@ -106,6 +102,11 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
         setListener()
     }
 
+//    fun <VB : ViewBinding>  Activity.xxx(inflate:(LayoutInflater)->VB) {
+//        inflate(layoutInflater).root
+//    }
+
+    /**@hide*/
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         initData()
@@ -141,7 +142,11 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
                 0,
                 0
             )
-            rootView.setBackgroundColor(resources.getColor(R.color.common_white))
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                rootView.setBackgroundColor(resources.getColor(common_white,null))
+            }else{
+                rootView.setBackgroundColor(resources.getColor(common_white))
+            }
         }
     }
 

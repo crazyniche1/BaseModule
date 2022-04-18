@@ -1,2 +1,18 @@
 模板代码：
 模板代码：
+
+关于使用viewStub标签 注意：
+ /**
+ * 使用标签viewStub 膨胀后，获取视图ID的方式
+ * 无法复用Viewbinding
+ */
+try {
+    val ConstraintLayout_f = viewBing.vsTest.inflate()
+    button2 =ConstraintLayout_f.findViewById(R.id.button2)
+    button2?.setOnClickListener { ToastUtil.showShort("stub_button") }
+
+    button2?.text = "nihao "
+
+}catch (e:Throwable){
+    viewBing.vsTest.visibility = View.VISIBLE
+}

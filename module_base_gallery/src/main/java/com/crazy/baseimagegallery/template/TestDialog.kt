@@ -3,7 +3,9 @@ package com.crazy.baseimagegallery.template
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.viewbinding.ViewBinding
 import com.crazy.baseimagegallery.R
+import com.crazy.baseimagegallery.databinding.ModuleBaseGalleryWindowBaseDialogBinding
 import com.crazy.baseimagegallery.util.dialog.BaseDialog
 import com.crazy.baseimagegallery.util.toast.ToastUtil
 
@@ -16,20 +18,19 @@ import com.crazy.baseimagegallery.util.toast.ToastUtil
  * History:
 
  */
-class TestDialog : BaseDialog() {
+class TestDialog  : BaseDialog<ModuleBaseGalleryWindowBaseDialogBinding>(ModuleBaseGalleryWindowBaseDialogBinding::inflate){
 
-    override var layoutResId: Int = R.layout.module_base_gallery_window_base_dialog
 
-    override fun mOnViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun mOnViewCreated(
+        view: ModuleBaseGalleryWindowBaseDialogBinding,
+        savedInstanceState: Bundle?
+    ) {
 
-        val sure = view.findViewById<TextView>(R.id.tx_sure_label)
-        val cancel = view.findViewById<TextView>(R.id.tx_cancel_label)
-
-        sure.setOnClickListener {
+        view.txSureLabel.setOnClickListener {
             ToastUtil.showShort("sure")
         }
 
-        cancel.setOnClickListener {
+        view.txSureLabel.setOnClickListener {
             ToastUtil.showShort("cancel")
         }
     }

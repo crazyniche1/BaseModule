@@ -1,19 +1,15 @@
 package com.crazy.baseimagegallery.util.dialog
 
-import android.app.Activity
-import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.widget.FrameLayout
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.viewbinding.ViewBinding
 import com.crazy.baseimagegallery.R
-import java.lang.Exception
 
 
 /**
@@ -24,11 +20,39 @@ import java.lang.Exception
  * Description:Dialog的抽象基类
  * 使用 ：继承自 BaseDialog  重写
  * History:
+ * 1.0 DialogFragment封装并抽象  ，后续只需要继承该基类即可
+ * 2.0 加入ViewBinding
+ *
+ * ps:
+ *
+ * @link com.crazy.baseimagegallery.template.TestDialog
+ *
+ *  class TestDialog  : BaseDialog<ModuleBaseGalleryWindowBaseDialogBinding>(ModuleBaseGalleryWindowBaseDialogBinding::inflate){
+ *       override fun mOnViewCreated(
+ *       view: ModuleBaseGalleryWindowBaseDialogBinding,
+ *       savedInstanceState: Bundle?
+ *       ) {
+ *
+ *       view.txSureLabel.setOnClickListener {
+ *       ToastUtil.showShort("sure")
+ *       }
+ *
+ *       view.txSureLabel.setOnClickListener {
+ *       ToastUtil.showShort("cancel")
+ *       }
+ *   }
+ * }
+ *
+ * use:
+ *  TestDialog().show(this.supportFragmentManager)
+ *
 
  */
-  abstract class BaseDialog : DialogFragment(), View.OnClickListener {
+abstract class BaseDialog <VB:ViewBinding> (val inflate : (LayoutInflater) -> VB): DialogFragment(), View.OnClickListener {
 
     private val mTag: String = "tag"
+
+    private val binding: VB by lazy {inflate(layoutInflater)}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +70,12 @@ import java.lang.Exception
     ): View? {
         //设置背景为透明
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        return inflater.inflate(layoutResId, container)
+//        inflater.inflate(getViewBinding.root, container)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        mOnViewCreated(view,savedInstanceState)
+        mOnViewCreated(binding,savedInstanceState)
     }
 
     open fun show(SupportFragmentManager: FragmentManager) {
@@ -59,10 +84,10 @@ import java.lang.Exception
 
     override fun onClick(v: View?) {}
 
-
     //布局ID
-    abstract  var layoutResId:Int
+//    abstract  var layoutResId:Int
+//    abstract  var getViewBinding: ViewBinding
     //附加视图
-    abstract  fun mOnViewCreated (view: View, savedInstanceState: Bundle?)
+    abstract  fun mOnViewCreated (view: VB, savedInstanceState: Bundle?)
 
 }
