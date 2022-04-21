@@ -14,7 +14,7 @@ class MainActivity2 : BaseActivity<ActivityMain2Binding>() {
         return ActivityMain2Binding.inflate(layoutInflater)
     }
 
-    override fun initView() {
+    override fun initData() {
 
         val TV2 :TextView = findViewById(R.id.textView2)
         viewBing.textView2.setOnClickListener {
@@ -60,6 +60,4 @@ class MainActivity2 : BaseActivity<ActivityMain2Binding>() {
         return super.onTouchEvent(event)
     }
 
-    override fun initData() {
-    }
 }

@@ -30,13 +30,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         return false
     }
 
-    override fun initView() {
+    override fun initData() {
         hideBottomUIMenu()
         LogTag.d("SplashActivity初始化函数${this
             .toString()}")
-    }
-
-    override fun initData() {
 
         object : CountDownTimer(countDownInterval,2000) {
             override fun onTick(millisUntilFinished: Long) {

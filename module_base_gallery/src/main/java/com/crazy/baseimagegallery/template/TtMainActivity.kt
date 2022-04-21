@@ -27,7 +27,7 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
     override fun getViewBinding()  = ActivityMainBinding.inflate(layoutInflater)
     override fun isSetStateView(): Boolean =false
 
-    override fun initView() {
+    override fun initData() {
 //        viewBing.button.setOnClickListener {
 //            SharedUtil<Any>(this,).image("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png?imageMogr2/auto-orient/strip|imageView2/2/w/345/format/webp")
 //            requestNet()
@@ -46,9 +46,7 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
 //        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fv_test) as NavHostFragment
 
 //            NavigationUI.setupActionBarWithNavController(this,navHostFragment.navController)
-        }
 
-    override fun initData() {
 //        tvVM.test1Request()
 
         tvVM.mWanLiveData.observe(this){

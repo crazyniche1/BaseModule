@@ -3,6 +3,7 @@ package com.crazy.baseimagegallery.base.ui.activity
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.os.Debug
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
@@ -47,9 +48,6 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
     /** 设置布局id
     abstract fun getLayoutId(): Int
      */
-
-    /**初始化视图*/
-    abstract fun initView()
 
     /** 初始化数据*/
     abstract fun initData()
@@ -97,7 +95,6 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
         if (isSetStateView()) {
             setStatusLayout()
         }
-        initView()
 
         setListener()
     }
@@ -106,10 +103,13 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
 //        inflate(layoutInflater).root
 //    }
 
-    /**@hide*/
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
+    /**
+     * 视图加载完毕，UI在该函数中获取焦点
+     */
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
         initData()
+
     }
 
     override fun onDestroy() {
@@ -118,6 +118,7 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
         ActivityManager.instance.removeActivity(this)
     }
     /**
+     * 初始化视图
      * ActivityMainBinding.inflate(layoutInflater)
      */
     protected abstract fun getViewBinding(): V

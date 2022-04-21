@@ -19,7 +19,6 @@ import com.crazy.baseimagegallery.util.AppUtils
 import com.crazy.baseimagegallery.util.arouter.RouterPath
 import com.crazy.baseimagegallery.util.toast.ToastUtil
 import com.crazy.commonapplication.databinding.ActivityMainBinding
-import com.crazy.commonapplication.databinding.ViewStubTopoBinding
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.random.Random
@@ -32,7 +31,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
-    override fun initView() {
+    override fun initData() {
+
+//        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
+
+            initRecycleView(buildRecycleViewData())
+            val id = intent.data
 //        viewBing.tv.text = "测试测试测试测试测试测试测试"
 //        viewBing.tv.setTextColor(resources.getColor(R.color.red))
 //        val builder = VmPolicy.Builder()
@@ -60,27 +64,27 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
              * 无法复用Viewbinding
              */
             try {
-                val ConstraintLayout_f = viewBing.vsTest.inflate()
-                button2 =ConstraintLayout_f.findViewById(R.id.button2)
+//                val ConstraintLayout_f = viewBing.vsTest.inflate()
+//                button2 =ConstraintLayout_f.findViewById(R.id.button2)
                 button2?.setOnClickListener { ToastUtil.showShort("stub_button") }
 
                 button2?.text = "nihao "
 
             }catch (e:Throwable){
-                viewBing.vsTest.visibility = View.VISIBLE
+//                viewBing.vsTest.visibility = View.VISIBLE
             }
 
-//            if (!AppUtils(this).serviceIsRun(MyService::class.java.name)){
-//                startService(Intent(this,MyService::class.java))
-//            }
-            LogTag.d("Thread :${Thread.currentThread().name}")
-            ARouter.getInstance().build(RouterPath.Service.s1).navigation()
+            if (!AppUtils(this).serviceIsRun(MyService::class.java.name)){
+                startService(Intent(this,MyService::class.java))
+            }
+//            LogTag.d("Thread :${Thread.currentThread().name}")
+//            ARouter.getInstance().build(RouterPath.Service.s1).navigation()
         }
 
 
         viewBing.bt.setOnLongClickListener {
             mdt?.notifyDataSetChanged()
-            viewBing.vsTest.visibility = View.GONE
+//            viewBing.vsTest.visibility = View.GONE
             return@setOnLongClickListener true
         }
 
@@ -98,15 +102,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
 
-    override fun initData() {
-
-//        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
-
-        initRecycleView(buildRecycleViewData())
-        val id = intent.data
 
 
-    }
+
 
     private fun buildRecycleViewData():MutableList<HashMap<Int,String>>{
         val dataSet = mutableListOf<HashMap<Int,String>>()
@@ -143,7 +141,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 
     private var button2: Button? = null
-    private var ViewStubTopoBinding: ViewStubTopoBinding? = null
+//    private var ViewStubTopoBinding: ViewStubTopoBinding? = null
     private lateinit var  mdt: ViewBindTadapter
     private var mExitTime:Long=0
 
@@ -152,7 +150,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (keyCode==KeyEvent.KEYCODE_BACK ) {
             if((System.currentTimeMillis().minus(mExitTime).compareTo(2000)) >0){
                 mExitTime=System.currentTimeMillis()
-                ToastUtil.showShort(R.string.module_base_gallery_main_exit_app)
+//                ToastUtil.showShort(R.string.module_base_gallery_main_exit_app)
 
             }else{
                 CommonUtil.exitApp()

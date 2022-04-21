@@ -26,6 +26,9 @@ class MyService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         LogTag.d("MyService_onStartCommand")
+
+        Thread.sleep(1000)
+        onStartCommand(intent, flags, startId)
         return super.onStartCommand(intent, flags, startId)
     }
 
