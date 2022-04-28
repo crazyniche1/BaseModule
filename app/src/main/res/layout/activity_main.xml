@@ -19,6 +19,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.155" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:tint="@color/bg" />
     <Button
         android:id="@+id/bt"
         android:layout_width="match_parent"
