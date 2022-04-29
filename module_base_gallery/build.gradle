@@ -15,13 +15,20 @@ android {
         if ( isModule.toBoolean()){
             applicationId "com.crazy.baseimagegallery"
         }
+        //项目支持最低的Android版本
         minSdkVersion 21
+        //基于哪个版本的sdk开发
         targetSdkVersion 30
+        //内部版本号
         versionCode 1
+        //外部版本号
         versionName "1.0"
 
+        //配置单元测试时使用的runner
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        //测试包名
+//        testApplicationId "com.zy.testAppcom"
+        //多dex 是否开启
         multiDexEnabled true
 
         javaCompileOptions {
@@ -40,6 +47,15 @@ android {
             else {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
             }
+
+            // 配置res文件夹，如果使用需要 需要自己手动新建再选择
+            res.srcDirs = [
+                    'src/main/res/layout/activity',
+                    'src/main/res/layout/fragment',
+                    'src/main/res/layout',
+                    'src/main/res'
+            ]
+
         }
     }
 
@@ -64,6 +80,24 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    //lint 配置
+    lintOptions {
+        //启动出错停止gradle 构建
+        abortOnError false
+        //关闭指定问题检查
+        disable 'TypographyFractions'
+        //打开指定问题检查
+        enable 'RtlHardcoded'
+        // 仅检查指定问题
+        check 'NewApi'
+
+        //生成html报告
+        htmlReport true
+        
+
+    }
+
     //约束资源前缀
     resourcePrefix "${project.name}_"
 }

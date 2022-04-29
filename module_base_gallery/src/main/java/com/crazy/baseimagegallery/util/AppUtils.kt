@@ -30,4 +30,8 @@ class AppUtils(private var mActivity:Context) {
         return isRun
     }
 
+    fun getVersion( pk:String): String? {
+         return mActivity.packageManager.getPackageInfo(pk,0).versionName
+
+    }
 }

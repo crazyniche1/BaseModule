@@ -2,18 +2,22 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+
 }
 
+
 android {
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
 
     defaultConfig {
         applicationId rootProject.ext.applicationId
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        versionCode appVersionCode
+        versionName appVersionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -23,6 +27,9 @@ android {
             }
         }
     }
+
+
+
 
     signingConfigs {
         config{
@@ -46,6 +53,8 @@ android {
             //正式版不打印日志
             buildConfigField("boolean", "LOG_DEBUG", "false")
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //调用签名
+            signingConfig signingConfigs.config
 
         }
 
@@ -65,6 +74,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 //    resourcePrefix "${project.name}_"
 
       //自定义输出apk名

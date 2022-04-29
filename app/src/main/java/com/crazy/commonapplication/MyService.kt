@@ -56,6 +56,8 @@ class MyService : Service() {
         val timer = Timer()
         timer.schedule(task, 300)
 
+        Thread.sleep(1000)
+        onStartCommand(intent, flags, startId)
         return super.onStartCommand(intent, flags, startId)
     }
 

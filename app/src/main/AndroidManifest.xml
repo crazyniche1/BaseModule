@@ -28,9 +28,7 @@
             android:enabled="true"
             android:exported="true" />
 
-        <meta-data
-            android:name="com.google.android.gms.car.application"
-            android:resource="@xml/automotive_app_desc" />
+
         <!--
          Main music service, provides media browsing and media playback services to
          consumers through MediaBrowserService and MediaSession. Consumers connect to it through
@@ -43,9 +41,6 @@
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
         </service>
-        <service
-            android:name=".TestIntentService"
-            android:exported="false" />
 
         <receiver
             android:name=".broadcast.BootUpReceiver"

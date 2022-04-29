@@ -14,7 +14,7 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun isSetStateView(): Boolean =true
 
-    override fun initView() {
+    override fun initData() {
         viewBing.button.setOnClickListener {
 //            SharedUtil<Any>(this,).image("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png?imageMogr2/auto-orient/strip|imageView2/2/w/345/format/webp")
 //            requestNet()
@@ -27,7 +27,6 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
 
     }
 
-    override fun initData() {
 
 //        //get vm
 //        val vmp = ViewModelProvider(this)
@@ -42,6 +41,5 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
 //        tvVM.errorInfo.observe(this){
 //            LogTag.d("err_test:::"+it.toString())
 //        }
-    }
 
 }
