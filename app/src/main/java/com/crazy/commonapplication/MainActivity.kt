@@ -14,12 +14,16 @@ import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.util.CommonUtil
 import com.crazy.baseimagegallery.util.activity.ActivityManager
 import android.app.ActivityManager.RunningServiceInfo
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
 import com.crazy.baseimagegallery.util.AppUtils
 import com.crazy.baseimagegallery.util.arouter.RouterPath
 import com.crazy.baseimagegallery.util.toast.ToastUtil
 import com.crazy.commonapplication.databinding.ActivityMainBinding
 import com.crazy.commonapplication.databinding.ViewStubTopoBinding
+import com.crazy.commonapplication.services.LocalService
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.random.Random
@@ -28,8 +32,75 @@ import kotlin.random.Random
 @Route(path = RouterPath.Home.home)
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
+
+
     override fun getViewBinding(): ActivityMainBinding {
+
         return ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+    
+
+    @Subscribe
+    public fun receiveData( bean:EventBusType) {
+//        LogTag.d("receiveData_size${bean.map.size}")
+//        LogTag.d("receiveData_size${maps.size}")
+//        LogTag.d("receiveData_size${bean.list.size}")
+//        for ((k,v) in bean.list.withIndex()){
+//            val list = mutableListOf<String>()
+//            list.add(k.toString())
+//            LogTag.d("${k}-------${maps[k]}")
+//        }
+//        bean.map = testBuildData(bean.map)
+//        val begin = System.currentTimeMillis()
+//        val over = System.currentTimeMillis()
+//        LogTag.d("receiveData——time：${over-begin}")
+//
+//        for ((k,v) in bean.map){
+//            if (maps[k]==1){
+//                LogTag.d("receiveData__continue")
+////                LogTag.d("${k}-------${maps[k]}")
+//                continue
+//            }
+//            maps[k] = 1
+//            LogTag.d("${k}-------${maps[k]}")
+//        }
+//
+//        GlobalScope.launch(context = Dispatchers.Main) {
+//        }
+        
+
+//        LogTag.d("receiveData_thread${Thread.currentThread() == Looper.getMainLooper().thread}")
+//        GlobalScope.launch(context = Dispatchers.IO) {
+//            //延时一秒
+//            for ((k,v) in bean.map){
+//                GlobalScope.launch(context = Dispatchers.Main) {
+//                    LogTag.d("receiveData————${k}")
+//                }
+//
+//            }
+//        }
+    }
+
+
+
+
+    private fun testBuildData(): MutableMap<String, Any> {
+        val map=  mutableMapOf<String, Any>()
+        for (i in  0..20){
+            map["$i"] = 1
+        }
+
+        return map
     }
 
     override fun initView() {
@@ -38,6 +109,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //        val builder = VmPolicy.Builder()
 //        StrictMode.setVmPolicy(builder.build())
 //        builder.detectFileUriExposure()
+
+        val name :String ? = null
+        val s = name ?: return
+
+
+        maps = testBuildData();
+        viewBing.bt.text = "这是一个按钮"
+//        LogTag.d("receiveData_thread${Thread.currentThread() == Looper.getMainLooper().thread}")
+
+
+
+        viewBing.bt.setOnLongClickListener {
+            mdt?.notifyDataSetChanged()
+            viewBing.vsTest.visibility = View.GONE
+            return@setOnLongClickListener true
+        }
+
+
+    }
+
+    private fun serviceIsRun(): Boolean {
+        var isRun =false
+        val amc = getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+        var services :List<RunningServiceInfo> = amc.getRunningServices(Int.MAX_VALUE)
+
+        for (service in  services ){
+            if (service.service.className == MyService::class.java.name) return true
+        }
+        return isRun
+    }
+
+    override fun initData() {
+
+//        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
+        ARouter.getInstance().inject(this)
+        initRecycleView(buildRecycleViewData())
+        val id = intent.data
+
+        viewBing.bt.text = "这是一个按钮"
+
         viewBing.bt.setOnClickListener {
 
             val ranColor = -0x1000000 or Random.nextInt(0x00ffffff)
@@ -74,38 +185,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //                startService(Intent(this,MyService::class.java))
 //            }
             LogTag.d("Thread :${Thread.currentThread().name}")
-            ARouter.getInstance().build(RouterPath.Service.s1).navigation()
+//            ARouter.getInstance().navigation(LocalService::class.java)
+//            val mLocalService = ARouter.getInstance().build(RouterPath.Service.s1).navigation() as LocalService
+//            mService.initService("zhouyu_test")
+            FindServices().findS()
+
+
         }
-
-
-        viewBing.bt.setOnLongClickListener {
-            mdt?.notifyDataSetChanged()
-            viewBing.vsTest.visibility = View.GONE
-            return@setOnLongClickListener true
-        }
-
-    }
-
-    private fun serviceIsRun(): Boolean {
-        var isRun =false
-        val amc = getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
-        var services :List<RunningServiceInfo> = amc.getRunningServices(Int.MAX_VALUE)
-
-        for (service in  services ){
-            if (service.service.className == MyService::class.java.name) return true
-        }
-        return isRun
-    }
-
-
-    override fun initData() {
-
-//        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
-
-        initRecycleView(buildRecycleViewData())
-        val id = intent.data
-
-
     }
 
     private fun buildRecycleViewData():MutableList<HashMap<Int,String>>{
@@ -142,6 +228,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
 
+    private lateinit var maps: MutableMap<String, Any>
     private var button2: Button? = null
     private var ViewStubTopoBinding: ViewStubTopoBinding? = null
     private lateinit var  mdt: ViewBindTadapter
