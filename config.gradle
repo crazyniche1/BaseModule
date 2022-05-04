@@ -1,0 +1,111 @@
+ext {
+    isModule = false
+
+    applicationId           = "com.crazy.commonapplication"
+    minSdkVersion           = 21
+    targetSdkVersion        = 30
+    versionCode             = 1
+    versionName             = "1.0"
+    compileSdkVersion       = 30
+    buildToolsVersion       = '30.0.0'
+
+    dagger2Version          = '2.17'
+    rxjava2Version          = '2.0.6'
+
+    mmvkVersion             = '1.2.10'
+    superAdapterVersion     = '3.6.8'
+
+    okhttpVersion           = '4.9.2'
+    retrofitVersion         = '2.9.0'
+    gsonVersion             = '2.8.9'
+    arouterVersion          = '1.5.2'
+
+    glide_version           = "4.12.0"
+
+    bugly_version           = "3.4.4"
+
+    AndroidAutoSizeVersion  = 'v1.2.1'
+
+    keyAlias                = 'key0'
+    storeFile               = '../jks/mbgjks.jks'
+    keyPassword             = 'mbgjks'
+    storePassword           = 'mbgjks'
+
+    lifecycleVersion        = "2.4.0"
+
+
+    android = [
+            applicationId           : "com.crazy.commonapplication",
+            minSdkVersion           : 21,
+            targetSdkVersion        : 30,
+            versionCode             : 1,
+            versionName             : "1.0",
+            compileSdkVersion       : 30,
+            buildToolsVersion       : '30.0.0'
+    ]
+
+    thirdFrame = [
+
+            dagger2Version:"com.google.dagger:dagger:$rootProject.dagger2Version",
+            dagger2SupVersion: "com.google.dagger:dagger-android-support:$rootProject.dagger2Version",
+
+            rxjavaVersion: "io.reactivex.rxjava2:rxjava:2.0.6",
+            rxandroidVersion: 'io.reactivex.rxjava2:rxandroid:2.0.1',
+
+            //沉浸式 状态栏
+            immersionbarVersion:'com.gyf.immersionbar:immersionbar:3.0.0',
+
+            //图片
+            glide_version: "com.github.bumptech.glide:glide:$rootProject.glide_version",
+
+
+            //MMKV
+            mmvkVersion: "com.tencent:mmkv-static:$rootProject.mmvkVersion",
+
+            //万能 适配器
+            superAdapterVersion: "org.byteam.superadapter:superadapter:$rootProject.superAdapterVersion",
+
+            //bugly
+            bugly_version: "com.tencent.bugly:crashreport:$rootProject.bugly_version",
+
+            okhttpVersion: "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion",
+            okhttpLogVersion: "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion",
+
+            retrofitVersion: "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion",
+            retrofitGVersion: "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion",
+            gsonVersion: "com.google.code.gson:gson:$rootProject.gsonVersion",
+
+
+            //屏幕适配
+            AndroidAutoSizeVersion: "com.github.JessYanCoding:AndroidAutoSize:$rootProject.AndroidAutoSizeVersion",
+
+            // ViewModel
+            lifecycleVersion: "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion",
+            lifecycleKVersion: "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion",
+            //liveData
+            lifecycleLKVersion: "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
+
+    ]
+
+    app = [
+            thirdFrame.dagger2Version,
+            thirdFrame.dagger2SupVersion,
+            thirdFrame.rxjavaVersion,
+            thirdFrame.rxandroidVersion,
+            thirdFrame.immersionbarVersion,
+            thirdFrame.glide_version,
+            thirdFrame.mmvkVersion,
+            thirdFrame.superAdapterVersion,
+            thirdFrame.bugly_version,
+            thirdFrame.okhttpVersion,
+            thirdFrame.okhttpLogVersion,
+            thirdFrame.retrofitVersion,
+            thirdFrame.retrofitGVersion,
+            thirdFrame.gsonVersion,
+            thirdFrame.AndroidAutoSizeVersion,
+            thirdFrame.lifecycleVersion,
+            thirdFrame.lifecycleKVersion,
+            thirdFrame.lifecycleLKVersion
+
+    ]
+}

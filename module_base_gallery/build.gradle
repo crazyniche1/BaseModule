@@ -125,48 +125,61 @@ dependencies {
     androidTestImplementation 'com.android.support.test:rules:1.0.2'
 
     //dagger2
-
-    implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
-    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
-    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
-    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
-
-    implementation "io.reactivex.rxjava2:rxjava:2.0.6"
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
-    //沉浸式 状态栏
-    implementation'com.gyf.immersionbar:immersionbar:3.0.0'
-
-    //图片
-    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
-    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
-
-    //MMKV
-    implementation "com.tencent:mmkv-static:$rootProject.mmvkVersion"
-
-    //万能 适配器
-    implementation "org.byteam.superadapter:superadapter:$rootProject.superAdapterVersion"
-
-    //bugly
-    implementation "com.tencent.bugly:crashreport:$rootProject.bugly_version"
-
-    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
-
-    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
-    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    //倒入第三方库
+    app.each {
+        implementation it
+    }
 
     api "com.alibaba:arouter-api:$rootProject.arouterVersion"
     kapt "com.alibaba:arouter-compiler:$rootProject.arouterVersion"
 
-    //屏幕适配
-    implementation "com.github.JessYanCoding:AndroidAutoSize:$rootProject.AndroidAutoSizeVersion"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
-    // ViewModel
-    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
-    //liveData
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
+
+
+//    implementation "com.google.dagger:dagger:$rootProject.dagger2Version"
+//    implementation "com.google.dagger:dagger-android-support:$rootProject.dagger2Version"
+//    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
+//    kapt "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
+//
+//    implementation "io.reactivex.rxjava2:rxjava:2.0.6"
+//    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+//
+//    //沉浸式 状态栏
+//    implementation'com.gyf.immersionbar:immersionbar:3.0.0'
+//
+//    //图片
+//    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+//    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+//
+//    //MMKV
+//    implementation "com.tencent:mmkv-static:$rootProject.mmvkVersion"
+//
+//    //万能 适配器
+//    implementation "org.byteam.superadapter:superadapter:$rootProject.superAdapterVersion"
+//
+//    //bugly
+//    implementation "com.tencent.bugly:crashreport:$rootProject.bugly_version"
+//
+//    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+//    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+//
+//    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+//    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+//    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+//
+//    api "com.alibaba:arouter-api:$rootProject.arouterVersion"
+//    kapt "com.alibaba:arouter-compiler:$rootProject.arouterVersion"
+//
+//    //屏幕适配
+//    implementation "com.github.JessYanCoding:AndroidAutoSize:$rootProject.AndroidAutoSizeVersion"
+//
+//    // ViewModel
+//    implementation "androidx.lifecycle:lifecycle-viewmodel:$rootProject.lifecycleVersion"
+//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+//    //liveData
+//    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
 
 }

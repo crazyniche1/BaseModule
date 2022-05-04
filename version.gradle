@@ -1,5 +1,5 @@
 ext {
-//    isModule1 = false
+
 // 版本号 版本名称
    appVersionCode = 1
    appVersionName = "2.0"

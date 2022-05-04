@@ -2,6 +2,7 @@ package com.crazy.baseimagegallery
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.beyondsoft.smarthome.utils.logs.LogTag
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +20,17 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.crazy.baseimagegallery", appContext.packageName)
+//        assertEquals("com.crazy.baseimagegallery", appContext.packageName)
+    }
+
+    @Test
+    fun test (){
+        val envMap = System.getenv()
+        for ((k,v) in envMap){
+
+            LogTag.d("this is the test:${k+v}")
+        }
+
+
     }
 }
