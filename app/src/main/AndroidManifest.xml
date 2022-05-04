@@ -41,9 +41,6 @@
                 <action android:name="android.media.browse.MediaBrowserService" />
             </intent-filter>
         </service>
-        <service
-            android:name=".TestIntentService"
-            android:exported="false" />
 
         <receiver
             android:name=".broadcast.BootUpReceiver"

@@ -32,7 +32,7 @@ open class LocalService:Sprovider {
 
         context.let {
             if (!AppUtils(context!!).serviceIsRun(MyService::class.java.name)){
-                context?. startService(Intent(context!!, MyService::class.java))
+//                context?. startService(Intent(context!!, MyService::class.java))
             }
         }
 
