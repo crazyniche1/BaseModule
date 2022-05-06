@@ -28,22 +28,19 @@ android {
         }
     }
 
-
-
-
     signingConfigs {
-        config{
+        release{
             keyAlias rootProject.ext.keyAlias
-            keyPassword rootProject.ext.keyPassword
+            keyPassword /*System.getenv("KEYSTORE_PASSWORD")*/ rootProject.ext.keyPassword
             storeFile file(rootProject.ext.storeFile)
-            storePassword rootProject.ext.storePassword
+            storePassword /*System.getenv("KEYSTORE_PASSWORD")*/ rootProject.ext.keyPassword
         }
+
     }
 
     buildTypes {
 
         release {
-            signingConfig signingConfigs.config
             //混淆编译
             minifyEnabled true
             //移除无用资源
@@ -54,12 +51,12 @@ android {
             buildConfigField("boolean", "LOG_DEBUG", "false")
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             //调用签名
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
 
         }
 
         debug {
-            signingConfig signingConfigs.config
+            signingConfig signingConfigs.release
             buildConfigField("boolean", "LOG_DEBUG", "true")
         }
 
