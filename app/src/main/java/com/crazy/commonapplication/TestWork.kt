@@ -4,6 +4,10 @@ import android.content.Context
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.beyondsoft.smarthome.utils.logs.LogTag
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 /**
  * Copyright (C), 2015-2022, 博彦科技
@@ -16,10 +20,16 @@ import com.beyondsoft.smarthome.utils.logs.LogTag
  */
 class TestWork(appContext: Context, workerParams: WorkerParameters) : Worker(appContext,workerParams) {
     override fun doWork(): Result {
-        TODO("Not yet implemented")
-        LogTag.d("Worker$ 运行成功")
-        Result.success()
+        //使用 协程
+        GlobalScope.launch {
+            delay(2_000)
+            LogTag.d("Worker$ 运行成功")
+        }
+
+       return Result.success()
     }
+
+
 
 
 }

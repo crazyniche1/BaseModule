@@ -21,4 +21,10 @@ class ExampleInstrumentedTest {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.crazy.commonapplication", appContext.packageName)
     }
+
+    @Test
+    fun xx(): Unit {
+        println("hello")
+    }
+
 }

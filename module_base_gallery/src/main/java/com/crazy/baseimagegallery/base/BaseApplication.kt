@@ -48,7 +48,7 @@ class BaseApplication : Application() , HasActivityInjector , ViewModelStoreOwne
 
         initARouter()
 
-        initBugly()
+//        initBugly()
 
     }
 

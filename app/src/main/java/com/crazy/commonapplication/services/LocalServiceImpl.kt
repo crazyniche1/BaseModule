@@ -1,7 +1,9 @@
 package com.crazy.commonapplication.services
 
+import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.util.AppUtils
@@ -29,12 +31,8 @@ open class LocalService:Sprovider {
      */
     override fun init(context: Context?) {
         LogTag.d("ARouter初始化函数${Thread.currentThread().name}")
+            context?. startService(Intent(context, MyService::class.java))
 
-        context.let {
-            if (!AppUtils(context!!).serviceIsRun(MyService::class.java.name)){
-//                context?. startService(Intent(context!!, MyService::class.java))
-            }
-        }
 
     }
 

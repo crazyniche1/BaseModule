@@ -1,30 +1,24 @@
 package com.crazy.commonapplication
 
-import android.content.Context
-import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.KeyEvent
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
-import android.widget.Button
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.beyondsoft.smarthome.utils.logs.LogTag
-import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
-import com.crazy.baseimagegallery.util.CommonUtil
-import com.crazy.baseimagegallery.util.activity.ActivityManager
-import android.app.ActivityManager.RunningServiceInfo
-import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
+import com.crazy.baseimagegallery.base.ui.activity.BaseActivity
 import com.crazy.baseimagegallery.util.AppUtils
-import com.crazy.baseimagegallery.util.Utils
+import com.crazy.baseimagegallery.util.CommonUtil
 import com.crazy.baseimagegallery.util.arouter.RouterPath
 import com.crazy.baseimagegallery.util.toast.ToastUtil
 import com.crazy.commonapplication.databinding.ActivityMainBinding
-import com.crazy.commonapplication.databinding.ViewStubTopoBinding
-import com.crazy.commonapplication.services.LocalService
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import java.util.*
 import kotlin.collections.HashMap
 import kotlin.random.Random
@@ -33,8 +27,6 @@ import kotlin.random.Random
 @Route(path = RouterPath.Home.home)
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-
-
     override fun getViewBinding(): ActivityMainBinding {
 
         return ActivityMainBinding.inflate(layoutInflater)
@@ -42,83 +34,79 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onStart() {
         super.onStart()
-        EventBus.getDefault().register(this)
+
+//        EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
-        EventBus.getDefault().unregister(this)
+//        EventBus.getDefault().unregister(this)
     }
-    
 
-    @Subscribe
-    public fun receiveData( bean:EventBusType) {
-//        LogTag.d("receiveData_size${bean.map.size}")
-//        LogTag.d("receiveData_size${maps.size}")
-//        LogTag.d("receiveData_size${bean.list.size}")
-//        for ((k,v) in bean.list.withIndex()){
-//            val list = mutableListOf<String>()
-//            list.add(k.toString())
-//            LogTag.d("${k}-------${maps[k]}")
-//        }
-//        bean.map = testBuildData(bean.map)
-//        val begin = System.currentTimeMillis()
-//        val over = System.currentTimeMillis()
-//        LogTag.d("receiveData——time：${over-begin}")
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 //
-//        for ((k,v) in bean.map){
-//            if (maps[k]==1){
-//                LogTag.d("receiveData__continue")
-////                LogTag.d("${k}-------${maps[k]}")
-//                continue
-//            }
-//            maps[k] = 1
-//            LogTag.d("${k}-------${maps[k]}")
-//        }
+//        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults)
 //
-//        GlobalScope.launch(context = Dispatchers.Main) {
-//        }
-        
-
-//        LogTag.d("receiveData_thread${Thread.currentThread() == Looper.getMainLooper().thread}")
-//        GlobalScope.launch(context = Dispatchers.IO) {
-//            //延时一秒
-//            for ((k,v) in bean.map){
-//                GlobalScope.launch(context = Dispatchers.Main) {
-//                    LogTag.d("receiveData————${k}")
-//                }
+//    }
 //
-//            }
-//        }
-    }
+//    companion object {
+//        const val  PERMISSIONS_REQUEST_CODE = 2
+//    }
+//
+//    @AfterPermissionGranted(PERMISSIONS_REQUEST_CODE)
+//    fun requestPermission() {
+//
+//       if ( EasyPermissions.hasPermissions(this,android.Manifest.permission.CAMERA)){
+//           ToastUtil.showShort("有相机权限")
+//
+//       }else{
+//
+//
+//           EasyPermissions.requestPermissions(this, "拍照过程需要用到相机权限",
+//               PERMISSIONS_REQUEST_CODE, android.Manifest.permission.CAMERA)
+//       }
+//
+//    }
 
 
-
-
-    private fun testBuildData(): MutableMap<String, Any> {
-        val map=  mutableMapOf<String, Any>()
-        for (i in  0..20){
-            map["$i"] = 1
-        }
-
-        return map
-    }
-
-
-    private fun serviceIsRun(): Boolean {
-        var isRun =false
-        val amc = getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
-        var services :List<RunningServiceInfo> = amc.getRunningServices(Int.MAX_VALUE)
-
-        for (service in  services ){
-            if (service.service.className == MyService::class.java.name) return true
-        }
-        return isRun
-    }
 
     override fun initData() {
 
-//        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
+        val uri: Uri? = intent.data
+        if (uri != null) {
+            val host: String? = uri.getHost()
+            val dataString = intent.dataString
+            val id: String? = uri.getQueryParameter("id")
+            val path: String? = uri.getPath()
+            val path1: String? = uri.getEncodedPath()
+            val queryString: String? = uri.getQuery()
+            val getQueryParameter = uri.getQueryParameter("zy")
+            Log.d("Alex", "getQueryParameter:$getQueryParameter")
+            Log.d("Alex", "host:$host")
+            Log.d("Alex", "dataString:$dataString")
+            Log.d("Alex", "id:$id")
+            Log.d("Alex", "path:$path")
+            Log.d("Alex", "path1:$path1")
+            Log.d("Alex", "queryString:$queryString")
+        }
+
+//        RaPermission().init(1,this).getPermission(object :OnPermissionCall{
+//            override fun success() {
+//                Toast.makeText(this@MainActivity,"success", Toast.LENGTH_SHORT).show()
+//            }
+//
+//            override fun failed() {
+//                Toast.makeText(this@MainActivity,"failed", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+
+
+        //Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.rv)
         ARouter.getInstance().inject(this)
         initRecycleView(buildRecycleViewData())
         val id = intent.data
@@ -131,67 +119,54 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
             val ranColor = -0x1000000 or Random.nextInt(0x00ffffff)
 
-//            val us = Utils()
-//            us.init(this)
-
-
             viewBing.bt.setBackgroundColor(ranColor)
 
-//            AppCompatDelegate.setDefaultNightMode( AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+//                    val xx = RaPermission().init(1,this)
+//            xx.getPermission(object : OnPermissionCall {
+//                override fun success() {
+//                }
+//
+//                override fun failed() {
+//                }
+//
+//            })
+
 //            SharedUtil<Any>(this).imageAPP("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png")
 //            SharedUtil<Any>(this).toInstallWebView("http://weixin.qq.com/download")
-
-
-//            ConcreteShareBuilder(this).create().shareText("nihao").show()
+//              ConcreteShareBuilder(this).create().shareText("nihao").show()
 //            ConcreteShareBuilder(this).create().shareImage("url").show()
-            val intent = Intent(mContext,MainActivity2::class.java)
+//            val intent = Intent(mContext,MainActivity2::class.java)
 //            startActivity(intent)
 
-
-            /**
-             * 使用标签viewStub 膨胀后，获取视图ID的方式
-             * 无法复用Viewbinding
-             */
-            try {
-//                val ConstraintLayout_f = viewBing.vsTest.inflate()
-//                button2 =ConstraintLayout_f.findViewById(R.id.button2)
-                button2?.setOnClickListener { ToastUtil.showShort("stub_button") }
-
-                button2?.text = "nihao "
-
-            }catch (e:Throwable){
-//                viewBing.vsTest.visibility = View.VISIBLE
-            }
-
-//            if (!AppUtils(this).serviceIsRun(MyService::class.java.name)){
-//                startService(Intent(this,MyService::class.java))
-//            }
-            LogTag.d("Thread :${Thread.currentThread().name}")
-//            ARouter.getInstance().navigation(LocalService::class.java)
-//            val mLocalService = ARouter.getInstance().build(RouterPath.Service.s1).navigation() as LocalService
-//            mService.initService("zhouyu_test")
-            FindServices().findS()
-            if (!AppUtils(this).serviceIsRun(MyService::class.java.name)){
-                startService(Intent(this,MyService::class.java))
-            }
-//            LogTag.d("Thread :${Thread.currentThread().name}")
-//            ARouter.getInstance().build(RouterPath.Service.s1).navigation()
+//            requestPermission()
         }
-
 
         viewBing.bt.setOnLongClickListener {
-            mdt?.notifyDataSetChanged()
+            mdt.notifyDataSetChanged()
 //            viewBing.vsTest.visibility = View.GONE
+            val request  = OneTimeWorkRequest.Builder(TestWork::class.java).build()
+            WorkManager.getInstance(this).enqueue(request)
+
+//            ARouter.getInstance().navigation(FindServices::class.java)
+            FindServices().findS()
+
             return@setOnLongClickListener true
         }
+
+//        addView { li: LayoutInflater, vg: ViewGroup ->
+//            println("测试添加addView")
+//            val v = li.inflate(R.layout.module_base_gallery_window_base_dialog, vg, false)
+//            vg.addView(v)
+//        }
 
 
     }
 
 
 
-
-
+    private fun BaseActivity<ActivityMainBinding>.addView( mView: (li: LayoutInflater,vg:ViewGroup) -> Unit){
+        mView(this.layoutInflater,viewBing.layoutCst)
+    }
 
     private fun buildRecycleViewData():MutableList<HashMap<Int,String>>{
         val dataSet = mutableListOf<HashMap<Int,String>>()
@@ -200,6 +175,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             map[i] = "nihaoya$i"
             dataSet.add(i,map)
         }
+
+
         return dataSet
     }
     private fun initRecycleView(dataSet:MutableList<HashMap<Int,String>>){
@@ -227,14 +204,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     }
 
 
-    private lateinit var maps: MutableMap<String, Any>
-    private var button2: Button? = null
-//    private var ViewStubTopoBinding: ViewStubTopoBinding? = null
     private lateinit var  mdt: ViewBindTadapter
     private var mExitTime:Long=0
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        LogTag.d(""+ ActivityManager.instance.currentActivity())
+//        LogTag.d(""+ ActivityManager.instance.currentActivity())
         if (keyCode==KeyEvent.KEYCODE_BACK ) {
             if((System.currentTimeMillis().minus(mExitTime).compareTo(2000)) >0){
                 mExitTime=System.currentTimeMillis()
@@ -247,5 +221,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
         return super.onKeyDown(keyCode, event)
     }
+
 
 }

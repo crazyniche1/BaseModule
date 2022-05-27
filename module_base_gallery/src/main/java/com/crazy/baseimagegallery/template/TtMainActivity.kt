@@ -1,23 +1,13 @@
 package com.crazy.baseimagegallery.template
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.animation.AnimationUtils
-import android.view.animation.LayoutAnimationController
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.ItemTouchHelper
+import android.net.Uri
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.alibaba.android.arouter.launcher.ARouter
 import com.beyondsoft.smarthome.utils.logs.LogTag
-import com.crazy.baseimagegallery.R
+import com.bumptech.glide.Glide
+import com.crazy.baseimagegallery.base.BaseApplication.Companion.context
 import com.crazy.baseimagegallery.databinding.ActivityMainBinding
 import com.crazy.baseimagegallery.mvvm.view.BaseVMActivity
-import java.util.zip.Inflater
 
 
 class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
@@ -48,7 +38,7 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
 //            NavigationUI.setupActionBarWithNavController(this,navHostFragment.navController)
 
 //        tvVM.test1Request()
-
+//        Glide.with(this).load("http://goo.gl/gEgYUd").into(viewBing.fcv)
         tvVM.mWanLiveData.observe(this){
             for (i in it.withIndex()){
                 LogTag.d("test:::"+tvVM.mWanLiveData.toString())
@@ -60,11 +50,19 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
 
 //        initRecycleView(buildRecycleViewData())
 
-        viewBing.button.setOnClickListener {
-            TestPopUpW(viewBing.tvTest,layoutInflater).show()
-
-            TestDialog().show(this.supportFragmentManager)
-        }
+//        viewBing.button.setOnClickListener {
+//
+//            val uri: Uri = Uri.parse("http://bs-portal.iot.com/login")
+//            val intent = Intent(Intent.ACTION_VIEW)
+//            intent.data = uri
+//            startActivity(intent)
+//            if (this != null && intent.resolveActivity(this.packageManager)!=null) {
+//
+//            }
+//            TestPopUpW(viewBing.tvTest,layoutInflater).show()
+//
+//            TestDialog().show(this.supportFragmentManager)
+//        }
 
 
     }
@@ -80,10 +78,10 @@ class TtMainActivity : BaseVMActivity<ActivityMainBinding>() {
     }
     private fun initRecycleView(dataSet:MutableList<HashMap<Int,String>>){
         var mdt = ViewBindTadapter(dataSet)
-        val rv = viewBing.rvRvList
+//        val rv = viewBing.rvRvList
 
-        rv.adapter = mdt
-        rv.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+//        rv.adapter = mdt
+//        rv.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
 
 
     }

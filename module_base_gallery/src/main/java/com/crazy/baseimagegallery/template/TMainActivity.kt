@@ -15,15 +15,25 @@ class TMainActivity : BaseActivity<ActivityMainBinding>() {
     override fun isSetStateView(): Boolean =true
 
     override fun initData() {
-        viewBing.button.setOnClickListener {
+//        viewBing.button.setOnClickListener {
 //            SharedUtil<Any>(this,).image("https://upload-images.jianshu.io/upload_images/3708736-e18ae9e2ab80e87d.png?imageMogr2/auto-orient/strip|imageView2/2/w/345/format/webp")
 //            requestNet()
 //            showLoading()
-            viewBing.button.postDelayed({
-                dismissLoading()
-            },3000L)
+//            viewBing.button.postDelayed({
+//                dismissLoading()
+//            },3000L)
+//
+//        }
 
-        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
 
     }
 

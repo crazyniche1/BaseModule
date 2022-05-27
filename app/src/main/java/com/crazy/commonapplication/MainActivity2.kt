@@ -16,11 +16,12 @@ class MainActivity2 : BaseActivity<ActivityMain2Binding>() {
 
     override fun initData() {
 
-        val TV2 :TextView = findViewById(R.id.textView2)
         viewBing.textView2.setOnClickListener {
             index += 50
             viewBing.textView2.translationX = index.toFloat()
         }
+
+        viewBing.btBack.setOnClickListener { finish() }
 
 
     }

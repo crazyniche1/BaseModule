@@ -1,35 +1,26 @@
 package com.crazy.commonapplication
 
-import android.app.Service
+import android.app.*
 import android.content.Intent
 import android.content.ServiceConnection
-import android.os.Handler
+import android.os.Build
 import android.os.IBinder
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.beyondsoft.smarthome.utils.logs.LogTag
-import kotlinx.coroutines.delay
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class MyService : Service() {
     override fun onCreate() {
-        if (!EventBus.getDefault().isRegistered(this)){
-            EventBus.getDefault().register(this)
-        }
+//        if (!EventBus.getDefault().isRegistered(this)){
+//            EventBus.getDefault().register(this)
+//        }
 
         super.onCreate()
 
 
         LogTag.d("MyService_onCreate")
-    }
-
-    @Subscribe
-    fun startReadonInventoryTag(scanBusEventBean: EventBusType?) {
-    }
-    override fun onBind(intent: Intent): IBinder {
-        TODO("Return the communication channel to the service.")
-        LogTag.d("MyService_onBind")
     }
 
     override fun unbindService(conn: ServiceConnection) {
@@ -38,47 +29,50 @@ class MyService : Service() {
     }
 
 
-    private var epcIDMap: HashMap<String, Any> = HashMap()
-    private var epcIDList: ArrayList<String> = ArrayList()
-    private var i  = 1
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        val nc = notification(pendingIntent())
+//        NotificationManagerCompat.from(this).notify()
+        startForeground(123,nc)
 
-        sendData()
-        val task: TimerTask = object : TimerTask() {
-            override fun run() {
-                i++
-                val hexStr = i.toString()
-                epcIDList.add(hexStr)
-//            epcIDMap[hexStr] = 0
-                onStartCommand(intent, flags, startId)
-            }
-        }
-        val timer = Timer()
-        timer.schedule(task, 300)
-
-        Thread.sleep(1000)
-        onStartCommand(intent, flags, startId)
         return super.onStartCommand(intent, flags, startId)
     }
 
-    fun sendData() {
+    private fun notification(intent: PendingIntent): Notification {
+        var notificationChannel: NotificationChannel?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationChannel = NotificationChannel(
+                "setChannelId",
+                "前台服务", NotificationManager.IMPORTANCE_HIGH
+            )
+            notificationChannel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+            val manager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+            manager.createNotificationChannel(notificationChannel)
 
-        val task: TimerTask = object : TimerTask() {
-            override fun run() {
-                EventBus.getDefault().post(EventBusType(epcIDList))
-                epcIDList.clear()
-                sendData()
-            }
         }
-        val timer = Timer()
-        timer.schedule(task, 3000)
 
 
+         return   NotificationCompat.Builder(this,"setChannelId")
+                .setContentText("ContentText")
+                .setSmallIcon(R.mipmap.ic_launcher)
+                .setContentIntent(intent)
+                .setTicker("Ticker")
+                .build()
     }
 
+    private fun pendingIntent(): PendingIntent {
+        return Intent(this, MainActivity2::class.java).let { notificationIntent ->
+            PendingIntent.getActivity(this, 0, notificationIntent, 0)
+        }
+    }
+
+
     override fun onDestroy() {
-        EventBus.getDefault().unregister(this)
+//        EventBus.getDefault().unregister(this)
         super.onDestroy()
         LogTag.d("MyService_onDestroy")
+    }
+
+    override fun onBind(intent: Intent?): IBinder? {
+        TODO("Not yet implemented")
     }
 }

@@ -7,6 +7,7 @@ import android.os.Debug
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.beyondsoft.smarthome.utils.logs.LogTag
 import com.crazy.baseimagegallery.R
 import com.crazy.baseimagegallery.R.color.common_white
 import com.crazy.baseimagegallery.databinding.LayoutBaseBinding
@@ -108,7 +109,7 @@ abstract class BaseActivity <V:ViewBinding>  :AppCompatActivity() {
      */
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        initData()
+        if (hasFocus)initData()
 
     }
 

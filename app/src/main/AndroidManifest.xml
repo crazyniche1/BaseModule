@@ -2,14 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.crazy.commonapplication">
-
     <!-- 获取开机广播 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" /> <!-- bugly 使用 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:name="com.crazy.baseimagegallery.base.BaseApplication"
@@ -19,16 +20,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <service
             android:name=".MyService2"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true"
+            android:foregroundServiceType="connectedDevice" />
         <service
             android:name=".MyService"
             android:enabled="true"
             android:exported="true" />
-
-
         <!--
          Main music service, provides media browsing and media playback services to
          consumers through MediaBrowserService and MediaSession. Consumers connect to it through
@@ -60,8 +61,22 @@
         <activity android:name=".MainActivity2" />
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="bs-portal.iot.com"
+                    android:path="/login"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait">

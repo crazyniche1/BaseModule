@@ -1,7 +1,9 @@
 package com.crazy.baseimagegallery.template
 
 import android.view.Menu
+import androidx.viewbinding.ViewBinding
 import com.beyondsoft.smarthome.utils.logs.LogTag
+import com.bumptech.glide.Glide
 import com.crazy.baseimagegallery.base.ui.fragment.BaseFragment
 import com.crazy.baseimagegallery.databinding.FragmentMainBinding
 
@@ -33,13 +35,17 @@ class FirstFragment:BaseFragment<FragmentMainBinding>() {
             return@setOnNavigationItemSelectedListener true
         }
 
-        viewBing.tvTest.setOnClickListener {
+//        viewBing.tvTitle.text= "fragment 1"
 
-//            Glide.with(this).load("").placeholder().into(viewBing.ivImage)
-//            Observer
+    }
 
-//            activity.getSystemService()
-        }
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
 
     }
 

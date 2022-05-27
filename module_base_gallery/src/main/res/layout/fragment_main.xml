@@ -36,8 +36,8 @@
 
                 />
 
-            <Button
-                android:id="@+id/button"
+            <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Button" />
@@ -54,19 +54,12 @@
         android:layout_height="wrap_content">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
             android:id="@+id/rv_rv_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
 
-        <TextView
-
-            android:id="@+id/tv_test"
-            android:textColor="@color/red"
-            android:padding="10dp"
-            android:text="@string/module_base_gallery_main_exit_app"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/tv_test1"
             android:textColor="@color/red"
